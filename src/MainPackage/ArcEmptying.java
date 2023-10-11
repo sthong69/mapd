@@ -2,8 +2,8 @@ package MainPackage;
 
 public class ArcEmptying extends ArcIn {
 
-	public ArcEmptying(int weight, Place place, Transition transition) {
-		super(weight, place, transition);
+	public ArcEmptying(Place place, Transition transition) {
+		super(place, transition);
 	}
 	
 	public void startExchange() throws Exception {

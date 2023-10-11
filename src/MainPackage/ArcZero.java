@@ -2,8 +2,8 @@ package MainPackage;
 
 public class ArcZero extends ArcIn {
 
-	public ArcZero(int weight, Place place, Transition transition) {
-		super(weight, place, transition);
+	public ArcZero(Place place, Transition transition) {
+		super(place, transition);
 	}
 	
 	public void startExchange() {

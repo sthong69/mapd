@@ -13,6 +13,12 @@ public class Arc {
 	}
 
 
+	public Arc(Place place, Transition transition) {
+		setPlace(place);
+		setTransition(transition);
+	}
+
+
 	public int getWeight() {
 		return weight;
 	}
