@@ -20,9 +20,32 @@ public class PetriNet implements PetriNetInterface {
 			
 	}
 
-	public void addArc(int weight, Place p, Transition t) {
-		
-		Arc a = new Arc(weight, p, t);
+	public void addArc(String type, int weight, Place p, Transition t) throws Exception {
+		if (type == "in") {
+			ArcIn newArcIn = new ArcIn(weight, p, t);
+			this.arcList.add(newArcIn);
+		}
+		else if (type == "out") {
+			ArcOut newArcOut = new ArcOut(weight, p, t);
+			this.arcList.add(newArcOut);
+		}
+		else {
+			throw new Exception("Ce type d'arc n'existe pas/Pas assez d'arguments");
+		}
+	}
+	
+	public void addArc(String type, Place p, Transition t) throws Exception {
+		if (type == "emptying") {
+			ArcEmptying newArcEmptying = new ArcEmptying(p, t); 
+			this.arcList.add(newArcEmptying);
+		}
+		else if (type == "zero") {
+			ArcZero newArcZero = new ArcZero(p,t);
+			this.arcList.add(newArcZero);
+		}
+		else { 
+			throw new Exception("Ce type d'arc n'existe pas/Trop d'arguments");
+		}
 	}
 
 	@Override
@@ -33,7 +56,6 @@ public class PetriNet implements PetriNetInterface {
 
 	@Override
 	public void addTransition(LinkedList<ArcIn> arcIn, LinkedList<ArcOut> arcOut) {
-		// TODO Auto-generated method stub
 		
 	}
 
