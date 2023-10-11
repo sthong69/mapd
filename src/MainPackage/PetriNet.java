@@ -50,8 +50,8 @@ public class PetriNet implements PetriNetInterface {
 
 	@Override
 	public void addPlace(int tokens) {
-		// TODO Auto-generated method stub
-		
+		Place newPlace = new Place(tokens);
+		this.placeList.add(newPlace);
 	}
 
 	@Override
@@ -62,19 +62,23 @@ public class PetriNet implements PetriNetInterface {
 
 	@Override
 	public void removePlace(Place p) {
-		// TODO Auto-generated method stub
-		
+		for (Arc tempArc : arcList) {
+			if (tempArc.getPlace() == p) {
+				removeArc(tempArc);
+			}
+		}
+		this.placeList.remove(p);
 	}
 
 	@Override
 	public void removeArc(Arc a) {
-		// TODO Auto-generated method stub
+		this.arcList.remove(a);
 		
 	}
 
 	@Override
 	public void removeTransition(Transition t) {
-		// TODO Auto-generated method stub
+		this.transitionList.remove()
 		
 	}
 	
