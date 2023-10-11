@@ -10,6 +10,4 @@ import java.util.LinkedList;public interface PetriNetInterface {
 	public void removeArc(Arc a);
 	public void removeTransition(Transition t);
 	public String toString();
-	
-	
 }
