@@ -55,8 +55,9 @@ public class PetriNet implements PetriNetInterface {
 	}
 
 	@Override
-	public void addTransition(LinkedList<ArcIn> arcIn, LinkedList<ArcOut> arcOut) {
-		
+	public void addTransition() {
+		Transition t = new Transition();
+		transitionList.add(t);
 	}
 
 	@Override

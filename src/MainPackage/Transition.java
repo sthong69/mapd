@@ -25,6 +25,22 @@ public class Transition {
 		this.arcOutList = new LinkedList<ArcOut>();
 	}
 	
+	public void addArcInList(ArcIn arc) {
+		this.arcInList.add(arc);
+	}
+	
+	public void removeArcInList(ArcIn arc) {
+		this.arcInList.remove(arc);
+	}
+	
+	public void addArcOutList(ArcOut arc) {
+		this.arcOutList.add(arc);
+	}
+	
+	public void removeArcOutList(ArcOut arc) {
+		this.arcOutList.remove(arc);
+	}
+	
 	public boolean isDrawable() {
 		boolean test;
 		for (ArcIn arc : this.arcInList) {
