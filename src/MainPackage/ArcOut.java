@@ -8,6 +8,7 @@ public class ArcOut extends Arc {
 	}
 	
 	private void updateTransition(Transition transition) {
+		transition.addArcOutList(this);
 	}
 
 	public void startExchange() {

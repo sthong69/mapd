@@ -13,6 +13,7 @@ public class ArcIn extends Arc {
 	}
 	
 	private void updateTransition(Transition transition) {
+		transition.addArcInList(this);
 	}
 
 	public void startExchange() throws Exception {
