@@ -1,7 +1,7 @@
 package MainPackage;
 
-import java.util.LinkedList;public interface PetriNetInterface {
-	public void fire();
+public interface PetriNetInterface {
+	public void fire() throws Exception;
 	public void addArc(String type,int weight, Place p, Transition t) throws Exception;
 	public void addArc(String type, Place p, Transition t) throws Exception;
 	public void addPlace(int tokens);

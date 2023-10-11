@@ -1,23 +1,50 @@
 package MainPackage;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 public class PetriNet implements PetriNetInterface {
 	
-	private String name;
 	private LinkedList<Arc> arcList;
 	private LinkedList<Place> placeList;
 	private LinkedList<Transition> transitionList;
 	
 	public PetriNet(String name) {
-		this.name=name;
 		this.arcList = new LinkedList<Arc>();
 		this.placeList = new LinkedList<Place>();
 		this.transitionList = new LinkedList<Transition>();
 	}
 
-	public void fire() {
+	public void fire() throws Exception {
+			LinkedList<Transition> possibleTransition = new LinkedList<Transition>();
+
+			for (Transition tempTransition : this.transitionList) {
+				boolean test = true;
+				int i = 0;
+				LinkedList<ArcIn> arcInList = tempTransition.getArcInList();
+
+				while (test && i<arcInList.size()) {
+
+					if (arcInList.get(i).checkAvailability()) {
+						test = false;
+					}
+
+					i++;
+				}
+				if (i==arcInList.size()) {
+					possibleTransition.add(tempTransition);
+				}
+			}
+
+			Transition drawnTransition = possibleTransition.get(new Random().nextInt(possibleTransition.size()));
 			
+			for (ArcIn tempArc : drawnTransition.getArcInList()) {
+				tempArc.startExchange();
+			}
+
+			for (ArcOut tempArc : drawnTransition.getArcOutList()) {
+				tempArc.startExchange();
+			}
 	}
 
 	public void addArc(String type, int weight, Place p, Transition t) throws Exception {
@@ -48,19 +75,16 @@ public class PetriNet implements PetriNetInterface {
 		}
 	}
 
-	@Override
 	public void addPlace(int tokens) {
 		Place newPlace = new Place(tokens);
 		this.placeList.add(newPlace);
 	}
 
-	@Override
 	public void addTransition() {
 		Transition t = new Transition();
 		transitionList.add(t);
 	}
 
-	@Override
 	public void removePlace(Place p) {
 		for (Arc tempArc : p.getArcList()) {
 			removeArc(tempArc);
@@ -68,7 +92,6 @@ public class PetriNet implements PetriNetInterface {
 		this.placeList.remove(p);
 	}
 
-	@Override
 	public void removeArc(Arc a) {
 		if (a instanceof ArcIn) {
 			a.getTransition().removeArcInList((ArcIn) a);
@@ -79,7 +102,6 @@ public class PetriNet implements PetriNetInterface {
 		this.arcList.remove(a);		
 	}
 
-	@Override
 	public void removeTransition(Transition t) {
 		for (ArcIn arcTemp : t.getArcInList()) {
 			removeArc(arcTemp);
