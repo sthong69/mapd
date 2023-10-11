@@ -1,18 +1,30 @@
 package MainPackage;
 
+import java.util.LinkedList;
+
 public class Place {
 	private int nbTokens;
+	private LinkedList<Arc> arcList;
 	
 	public Place(int nbTokens) {
 		setnbTokens(nbTokens);
+		setArcList();
 	}
 	
 	private void setnbTokens(int nbTokens) {
 		this.nbTokens = nbTokens;
 	}
 	
+	private void setArcList() {
+		this.arcList = new LinkedList<Arc>();
+	}
+	
 	public int getNbTokens() {
 		return nbTokens;
+	}
+	
+	public LinkedList<Arc> getArcList() {
+		return arcList;
 	}
 	
 	public void addTokens(int nbTokensToAdd) {
