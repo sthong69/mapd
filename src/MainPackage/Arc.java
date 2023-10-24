@@ -1,25 +1,12 @@
 package MainPackage;
 
-public class Arc {
+public abstract class Arc {
 	private int weight;
 	private Place place;
 	private Transition transition;
-	
-	
-	public Arc(int weight, Place place, Transition transition) {
-		setWeight(weight);
-		setPlace(place);
-		setTransition(transition);
-	}
 
 
-	public Arc(Place place, Transition transition) {
-		setPlace(place);
-		setTransition(transition);
-	}
-
-
-	public int getWeight() {
+	public int getWeight() { 
 		return weight;
 	}
 
