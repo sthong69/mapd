@@ -5,46 +5,18 @@ import java.util.Random;
 
 public class PetriNet implements PetriNetInterface {
 	
+	private String name;
 	private LinkedList<Arc> arcList;
 	private LinkedList<Place> placeList;
 	private LinkedList<Transition> transitionList;
 	
 	public PetriNet(String name) {
+		// TODO : faire un getter/setter
+		// TODO : faire un toString()
+		this.name=name;
 		this.arcList = new LinkedList<Arc>();
 		this.placeList = new LinkedList<Place>();
 		this.transitionList = new LinkedList<Transition>();
-	}
-
-	public void fire() throws Exception {
-			LinkedList<Transition> possibleTransition = new LinkedList<Transition>();
-
-			for (Transition tempTransition : this.transitionList) {
-				boolean test = true;
-				int i = 0;
-				LinkedList<ArcIn> arcInList = tempTransition.getArcInList();
-
-				while (test && i<arcInList.size()) {
-
-					if (arcInList.get(i).checkAvailability()) {
-						test = false;
-					}
-
-					i++;
-				}
-				if (i==arcInList.size()) {
-					possibleTransition.add(tempTransition);
-				}
-			}
-
-			Transition drawnTransition = possibleTransition.get(new Random().nextInt(possibleTransition.size()));
-			
-			for (ArcIn tempArc : drawnTransition.getArcInList()) {
-				tempArc.startExchange();
-			}
-
-			for (ArcOut tempArc : drawnTransition.getArcOutList()) {
-				tempArc.startExchange();
-			}
 	}
 
 	public void addArc(String type, int weight, Place p, Transition t) throws Exception {
@@ -114,5 +86,37 @@ public class PetriNet implements PetriNetInterface {
 		this.transitionList.remove();
 		
 	}
+	
+	public void fire() throws Exception {
+		LinkedList<Transition> possibleTransition = new LinkedList<Transition>();
+
+		for (Transition tempTransition : this.transitionList) {
+			boolean test = true;
+			int i = 0;
+			LinkedList<ArcIn> arcInList = tempTransition.getArcInList();
+
+			while (test && i<arcInList.size()) {
+
+				if (arcInList.get(i).checkAvailability()) {
+					test = false;
+				}
+
+				i++;
+			}
+			if (i==arcInList.size()) {
+				possibleTransition.add(tempTransition);
+			}
+		}
+
+		Transition drawnTransition = possibleTransition.get(new Random().nextInt(possibleTransition.size()));
+		
+		for (ArcIn tempArc : drawnTransition.getArcInList()) {
+			tempArc.startExchange();
+		}
+
+		for (ArcOut tempArc : drawnTransition.getArcOutList()) {
+			tempArc.startExchange();
+		}
+}
 	
 }

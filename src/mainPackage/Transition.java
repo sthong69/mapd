@@ -12,12 +12,15 @@ public class Transition {
 		setArcInList();
 		setArcOutList();
 	}
+	
 	public LinkedList<ArcIn> getArcInList() {
 		return arcInList;
 	}
+	
 	public void setArcInList() {
 		this.arcInList = new LinkedList<ArcIn>();
 	}
+	
 	public LinkedList<ArcOut> getArcOutList() {
 		return arcOutList;
 	}
