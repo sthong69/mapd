@@ -10,10 +10,7 @@ public class ArcIn extends Arc {
 	}
 	
 	public ArcIn(Place place, Transition transition) {
-		setWeight(1);
-		setPlace(place);
-		setTransition(transition);
-		updateTransition(transition);
+		this(1, place, transition);
 	}
 	
 	private void updateTransition(Transition transition) {
