@@ -1,4 +1,4 @@
-package MainPackage;
+package mainPackage;
 
 public interface PetriNetInterface {
 	public void fire() throws Exception;

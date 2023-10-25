@@ -1,14 +1,18 @@
-package MainPackage;
+package mainPackage;
 
 public class ArcIn extends Arc {
 
 	public ArcIn(int weight, Place place, Transition transition) {
-		super(weight, place, transition);
+		setWeight(weight);
+		setPlace(place);
+		setTransition(transition);
 		updateTransition(transition);
 	}
 	
 	public ArcIn(Place place, Transition transition) {
-		super(place, transition);
+		setWeight(1);
+		setPlace(place);
+		setTransition(transition);
 		updateTransition(transition);
 	}
 	

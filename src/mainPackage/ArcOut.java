@@ -1,9 +1,11 @@
-package MainPackage;
+package mainPackage;
 
 public class ArcOut extends Arc {
 
 	public ArcOut(int weight, Place place, Transition transition) {
-		super(weight, place, transition);
+		setWeight(weight);
+		setPlace(place);
+		setTransition(transition);
 		updateTransition(transition);
 	}
 	

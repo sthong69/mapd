@@ -1,4 +1,4 @@
-package MainPackage;
+package mainPackage;
 
 public abstract class Arc {
 	private int weight;
