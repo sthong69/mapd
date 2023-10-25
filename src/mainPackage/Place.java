@@ -27,7 +27,10 @@ public class Place {
 		return arcList;
 	}
 	
-	public void addTokens(int nbTokensToAdd) {
+	public void addTokens(int nbTokensToAdd) throws Exception {
+		if (nbTokensToAdd<0) {
+			throw new Exception("La quantité de jetons à ajouter ne peut pas être négative !");
+		}
 		nbTokens += nbTokensToAdd;
 	}
 	
