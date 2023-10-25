@@ -1,8 +1,10 @@
 package mainPackage;
 
+import Exceptions.NegativeWeightException;
+
 public class ArcZero extends ArcIn {
 
-	public ArcZero(Place place, Transition transition) {
+	public ArcZero(Place place, Transition transition) throws NegativeWeightException{
 		super(place, transition);
 	}
 	
