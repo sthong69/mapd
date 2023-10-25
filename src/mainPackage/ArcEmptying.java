@@ -1,8 +1,10 @@
 package mainPackage;
 
+import Exceptions.NegativeWeightException;
+
 public class ArcEmptying extends ArcIn {
 
-	public ArcEmptying(Place place, Transition transition) {
+	public ArcEmptying(Place place, Transition transition) throws NegativeWeightException{
 		super(place, transition);
 	}
 	
