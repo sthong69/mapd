@@ -17,7 +17,7 @@ public class TestArc {
 	static Transition t0;
 	static Arc a0;
 	static Arc a1;
-	static LinkedList<Arc> testList;
+	static Arc a2;
 	
 	@BeforeAll
 	public static void setup() {
@@ -25,8 +25,7 @@ public class TestArc {
 		t0 = new Transition();
 		a0 = new ArcIn(5, p0, t0);
 		a1 = new ArcIn(p0, t0);
-		testList = new LinkedList<Arc>();
-		testList.add(a0);
+		a2 = new ArcIn(-5, p0, t0);
 	}
 	
 	@Test

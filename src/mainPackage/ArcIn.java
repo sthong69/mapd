@@ -1,15 +1,21 @@
 package mainPackage;
 
+import Exceptions.NegativeWeightException;
+
 public class ArcIn extends Arc {
 
-	public ArcIn(int weight, Place place, Transition transition) {
+	public ArcIn(int weight, Place place, Transition transition) throws NegativeWeightException{
+		if (weight<0) {
+			throw new NegativeWeightException("warning : negative weight");
+		}
+		
 		setWeight(weight);
 		setPlace(place);
 		setTransition(transition);
 		updateTransition(transition);
 	}
 	
-	public ArcIn(Place place, Transition transition) {
+	public ArcIn(Place place, Transition transition) throws NegativeWeightException{
 		this(1, place, transition);
 	}
 	
