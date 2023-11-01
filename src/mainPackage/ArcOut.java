@@ -15,6 +15,10 @@ public class ArcOut extends Arc {
 		updateTransition(transition);
 	}
 	
+	public ArcOut(Place place, Transition transition) throws NegativeWeightException{
+		this(1, place, transition);
+	}
+	
 	private void updateTransition(Transition transition) {
 		transition.addArcOutList(this);
 	}
