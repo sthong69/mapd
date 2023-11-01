@@ -36,6 +36,6 @@ public abstract class Arc {
 	}
 	
 	public String toString() {
-		return "Arc String";
+		return "Weight: "+weight+"\nPlace: "+place+"\nTransition: "+transition;
 	}
 }

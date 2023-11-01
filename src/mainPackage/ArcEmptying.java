@@ -1,5 +1,6 @@
 package mainPackage;
 
+import Exceptions.NegativeNbTokensException;
 import Exceptions.NegativeWeightException;
 
 public class ArcEmptying extends ArcIn {

@@ -3,6 +3,8 @@ package mainPackage;
 import java.util.LinkedList;
 import java.util.Random;
 
+import Exceptions.NegativeWeightException;
+
 public class PetriNet implements PetriNetInterface {
 	
 	private String name;
@@ -19,7 +21,10 @@ public class PetriNet implements PetriNetInterface {
 		this.transitionList = new LinkedList<Transition>();
 	}
 
-	public void addArc(String type, int weight, Place p, Transition t) throws Exception {
+	public void addArc(String type, int weight, Place p, Transition t) throws Exception, NegativeWeightException{
+		if (weight<0) {
+			throw new NegativeWeightException("warning : negative weight not allowed");
+		}
 		if (type == "in") {
 			ArcIn newArcIn = new ArcIn(weight, p, t);
 			this.arcList.add(newArcIn);
