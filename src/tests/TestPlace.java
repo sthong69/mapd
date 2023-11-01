@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import mainPackage.Place;
 
+
+
 public class TestPlace {
 	static Place p0;
 	
@@ -16,6 +18,7 @@ public class TestPlace {
 	
 	@Test
 	public void testConstructor() {
+		p0 = new Place(0);
 		Assertions.assertEquals(0,p0.getNbTokens());
 		Assertions.assertEquals(0,p0.getArcList().size());
 	}
