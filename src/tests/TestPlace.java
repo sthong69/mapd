@@ -9,6 +9,8 @@ import Exceptions.NegativeNbTokensException;
 import mainPackage.ArcIn;
 import mainPackage.Place;
 
+
+
 public class TestPlace {
 	static Place p0;
 	
@@ -20,6 +22,7 @@ public class TestPlace {
 	@Test
 	@Order(1)  
 	public void testConstructor() {
+		p0 = new Place(0);
 		System.out.println(p0.getNbTokens());
 		System.out.println(p0.getArcList().size());
 		Assertions.assertEquals(0,p0.getNbTokens());
