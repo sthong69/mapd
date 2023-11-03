@@ -55,7 +55,7 @@ public class PetriNet implements PetriNetInterface {
 
 	public void addArc(String type, int weight, Place p, Transition t) throws Exception, NegativeWeightException{
 		if (weight<0) {
-			throw new NegativeWeightException("warning : negative weight not allowed");
+			throw new NegativeWeightException("WARNING: An arc can not have a negative weight.");
 		}
 		if (type == "in") {
 			ArcIn newArcIn = new ArcIn(weight, p, t);
