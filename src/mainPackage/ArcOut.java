@@ -20,7 +20,7 @@ public class ArcOut extends Arc {
 	}
 	
 	private void updateTransition(Transition transition) {
-		transition.addArcOutList(this);
+		transition.addArcOut(this);
 	}
 
 	public void startExchange() throws NegativeNbTokensException{

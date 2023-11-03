@@ -28,19 +28,19 @@ public class Transition {
 		this.arcOutList = new LinkedList<ArcOut>();
 	}
 	
-	public void addArcInList(ArcIn arc) {
+	public void addArcIn(ArcIn arc) {
 		this.arcInList.add(arc);
 	}
 	
-	public void removeArcInList(ArcIn arc) {
+	public void removeArcIn(ArcIn arc) {
 		this.arcInList.remove(arc);
 	}
 	
-	public void addArcOutList(ArcOut arc) {
+	public void addArcOut(ArcOut arc) {
 		this.arcOutList.add(arc);
 	}
 	
-	public void removeArcOutList(ArcOut arc) {
+	public void removeArcOut(ArcOut arc) {
 		this.arcOutList.remove(arc);
 	}
 	

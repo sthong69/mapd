@@ -21,7 +21,7 @@ public class ArcIn extends Arc {
 	}
 	
 	private void updateTransition(Transition transition) {
-		transition.addArcInList(this);
+		transition.addArcIn(this);
 	}
 
 	public void startExchange() throws NegativeNbTokensException {

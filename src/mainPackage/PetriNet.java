@@ -13,13 +13,45 @@ public class PetriNet implements PetriNetInterface {
 	private LinkedList<Transition> transitionList;
 	
 	public PetriNet(String name) {
-		// TODO : faire un getter/setter
 		// TODO : faire un toString()
-		this.name=name;
-		this.arcList = new LinkedList<Arc>();
-		this.placeList = new LinkedList<Place>();
-		this.transitionList = new LinkedList<Transition>();
+		this.setName(name);
+		this.setArcList(new LinkedList<Arc>());
+		this.setPlaceList(new LinkedList<Place>());;
+		this.setTransitionList(new LinkedList<Transition>());
 	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	private void setName(String name) {
+		this.name = name;
+	}
+	
+	public LinkedList<Arc> getArcList() {
+		return arcList;
+	}
+	
+	private void setArcList(LinkedList<Arc> arcList) {
+		this.arcList = arcList;
+	}
+	
+	public LinkedList<Place> getPlaceList() {
+		return placeList;
+	}
+	
+	private void setPlaceList(LinkedList<Place> placeList) {
+		this.placeList = placeList;
+	}
+	
+	public LinkedList<Transition> getTransitionList() {
+		return transitionList;
+	}
+	
+	private void setTransitionList(LinkedList<Transition> transitionList) {
+		this.transitionList = transitionList;
+	}
+	
 
 	public void addArc(String type, int weight, Place p, Transition t) throws Exception, NegativeWeightException{
 		if (weight<0) {
@@ -71,10 +103,10 @@ public class PetriNet implements PetriNetInterface {
 
 	public void removeArc(Arc a) {
 		if (a instanceof ArcIn) {
-			a.getTransition().removeArcInList((ArcIn) a);
+			a.getTransition().removeArcIn((ArcIn) a);
 		}
 		else if (a instanceof ArcOut) {
-			a.getTransition().removeArcOutList((ArcOut) a);
+			a.getTransition().removeArcOut((ArcOut) a);
 		}
 		this.arcList.remove(a);		
 	}
