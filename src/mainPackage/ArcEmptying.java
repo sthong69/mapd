@@ -9,7 +9,7 @@ public class ArcEmptying extends ArcIn {
 		super(place, transition);
 	}
 	
-	public void startExchange() throws Exception {
+	public void startExchange() throws NegativeNbTokensException {
 		this.getPlace().removeTokens(this.getPlace().getNbTokens());
 	}
 	

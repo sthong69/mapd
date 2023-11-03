@@ -1,12 +1,13 @@
 package mainPackage;
 
+import Exceptions.NegativeNbTokensException;
 import Exceptions.NegativeWeightException;
 
 public class ArcIn extends Arc {
 
 	public ArcIn(int weight, Place place, Transition transition) throws NegativeWeightException{
 		if (weight<0) {
-			throw new NegativeWeightException("warning : negative weight");
+			throw new NegativeWeightException("WARNING: An arc can not have a negative weight.");
 		}
 		
 		setWeight(weight);
@@ -23,7 +24,7 @@ public class ArcIn extends Arc {
 		transition.addArcInList(this);
 	}
 
-	public void startExchange() throws Exception {
+	public void startExchange() throws NegativeNbTokensException {
 		this.getPlace().removeTokens(this.getWeight());
 	}
 	

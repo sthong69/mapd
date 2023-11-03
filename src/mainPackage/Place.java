@@ -31,17 +31,17 @@ public class Place {
 	
 	public void addTokens(int nbTokensToAdd) throws NegativeNbTokensException {
 		if (nbTokensToAdd < 0) {
-			throw new NegativeNbTokensException("La quantité de jetons à ajouter ne peut pas être négative !");
+			throw new NegativeNbTokensException("WARNING: The number of tokens to add can not be negative.");
 		}
 		nbTokens += nbTokensToAdd;
 	}
 	
 	public void removeTokens(int nbTokensToRemove) throws NegativeNbTokensException {
 		if (nbTokensToRemove < 0) {
-			throw new NegativeNbTokensException("La quantité de jetons à enlever ne peut pas être négative !");
+			throw new NegativeNbTokensException("WARNING: The number of tokens to remove can not be negative.");
 		}
 		if (nbTokensToRemove > nbTokens) {
-			throw new NegativeNbTokensException("La quantité de jetons finale ne peut pas être négative !");
+			throw new NegativeNbTokensException("WARNING: The final number of tokens can not be negative.");
 		}
 		nbTokens -= nbTokensToRemove;
 	}
