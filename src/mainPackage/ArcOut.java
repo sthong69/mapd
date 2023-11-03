@@ -7,7 +7,7 @@ public class ArcOut extends Arc {
 
 	public ArcOut(int weight, Place place, Transition transition) throws NegativeWeightException{
 		if (weight<0) {
-			throw new NegativeWeightException("warning : negative weight");
+			throw new NegativeWeightException("WARNING: An arc can not have a negative weight.");
 		}
 		setWeight(weight);
 		setPlace(place);

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import Exceptions.NegativeWeightException;
 import mainPackage.ArcEmptying;
+import mainPackage.ArcZero;
 import mainPackage.Place;
 import mainPackage.Transition;
 
@@ -33,6 +34,7 @@ public class TestArcEmptying {
 		Assertions.assertEquals(p0, a0.getPlace());
 		Assertions.assertEquals(t0, a0.getTransition());
 		Assertions.assertEquals(1, a0.getWeight());
+		Assertions.assertTrue(a0 instanceof ArcEmptying);
 	}
 	
 	@Test

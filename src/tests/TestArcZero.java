@@ -32,7 +32,7 @@ public class TestArcZero {
 		Assertions.assertEquals(p0, a0.getPlace());
 		Assertions.assertEquals(t0, a0.getTransition());
 		Assertions.assertEquals(1, a0.getWeight());
-
+		Assertions.assertTrue(a0 instanceof ArcZero);
 	}
 	
 	@Test

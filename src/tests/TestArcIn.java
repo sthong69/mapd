@@ -22,8 +22,8 @@ public class TestArcIn {
 	public static void setup() throws NegativeWeightException{
 		p0 = new Place(10);
 		t0 = new Transition();
-		a0 = new ArcIn(3, p0, t0); 
-		a1 = new ArcIn(p0, t0);
+		a0 = new ArcIn(p0, t0);
+		a1 = new ArcIn(3, p0, t0); 
 	}
 	
 	@Test
@@ -33,7 +33,6 @@ public class TestArcIn {
 		Assertions.assertEquals(1, a0.getWeight());
 		Assertions.assertEquals(p0, a0.getPlace());
 		Assertions.assertEquals(t0, a0.getTransition());
-		System.out.println(t0.getArcInList().get(0));
 		Assertions.assertTrue(t0.getArcInList().contains(a0));
 		
 		// CAE1
@@ -50,7 +49,7 @@ public class TestArcIn {
 	
 	@Test
 	public void testStartExchange() throws NegativeNbTokensException, NegativeWeightException {
-		a0.startExchange();
+		a1.startExchange();
 		Assertions.assertEquals(7, p0.getNbTokens());
 		Place p1 = new Place(2);
 		a2 = new ArcIn(5, p1, t0);
