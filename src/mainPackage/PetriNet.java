@@ -100,24 +100,27 @@ public class PetriNet implements PetriNetInterface {
 		return t;
 	}
 
-	public void removePlace(Place p) {
-		for (Arc tempArc : p.getArcList()) {
-			removeArc(tempArc);
-		}
-		this.placeList.remove(p);
-	}
+
 
 	public void removeArc(Arc a) {
 		if (a instanceof ArcIn) {
 			a.getTransition().removeArcIn((ArcIn) a);
-			a.getPlace().removeArc(a);		}
+			a.getPlace().removeArc(a);		
+		}
 		else if (a instanceof ArcOut) {
 			a.getTransition().removeArcOut((ArcOut) a);
 			a.getPlace().removeArc(a);
 		}
 		this.arcList.remove(a);		
 	}
-
+	
+	public void removePlace(Place p) {
+		for (Arc tempArc : p.getArcList()) {
+			removeArc(tempArc);
+		}
+		this.placeList.remove(p);
+	}
+	
 	public void removeTransition(Transition t) {
 		for (ArcIn arcTemp : t.getArcInList()) {
 			removeArc(arcTemp);

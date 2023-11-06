@@ -88,44 +88,75 @@ public class TestPetriNet {
 	}
 	
 	@Test
-	public void testRemoveTransition() {
+	public void testRemoveTransition() throws NegativeWeightException, Exception {
+		PetriNet pn1 = new PetriNet("");
+		Place pl1 = pn1.addPlace(0);
+		Transition t1 = pn1.addTransition();
+		Assertions.assertEquals(1, pn1.getTransitionList().size());
 		
+		Arc a1 = pn1.addArc("in", 2, pl1, t1);
+		Arc a2 = pn1.addArc("out", 2, pl1, t1);
+		Assertions.assertEquals(2, pn1.getArcList().size());
+		
+		pn1.removeTransition(t1);
+		Assertions.assertEquals(0, pn1.getArcList().size());
+		Assertions.assertEquals(0, pn1.getTransitionList().size());
 	}
 	
 	@Test
-	public void testRemovePlace() {
+	public void testRemovePlace() throws NegativeWeightException, Exception {
+		PetriNet pn1 = new PetriNet("");
+		Place pl1 = pn1.addPlace(0);
+		Transition t1 = pn1.addTransition();
+		Assertions.assertEquals(1, pn1.getPlaceList().size());
 		
+		Arc a1 = pn1.addArc("in", 2, pl1, t1);
+		Arc a2 = pn1.addArc("in", 1, pl1, t1);
+		Arc a3 = pn1.addArc("in", 1, pl1, t1);
+		Assertions.assertEquals(2, pn1.getArcList().size());
+		
+		pn1.removePlace(pl1);
+		Assertions.assertEquals(0, pn1.getArcList().size());
+		//System.out.println(pn1.getArcList());
+		Assertions.assertEquals(0, pn1.getPlaceList().size());
 	}
 	
 	@Test
 	public void testRemoveArc() throws NegativeWeightException, Exception {
-		Transition t1 = pn0.addTransition();
-		Place pl1 = pn0.addPlace(2);
+		PetriNet pn1 = new PetriNet("Test");
 		
-		Arc a1 = pn0.addArc("in", 1, pl1, t1);
-		Arc a2 = pn0.addArc("out",4, pl1, t1);
-		Arc a3 = pn0.addArc("emptying", pl1, t1);
-		Arc a4 = pn0.addArc("zero", pl1, t1);
+		Transition t1 = pn1.addTransition();
+		Place pl1 = pn1.addPlace(2);
+		
+		Arc a1 = pn1.addArc("in", 1, pl1, t1);
+		Arc a2 = pn1.addArc("out",4, pl1, t1);
+		Arc a3 = pn1.addArc("emptying", pl1, t1);
+		Arc a4 = pn1.addArc("zero", pl1, t1);
 		
 		Assertions.assertEquals(4, pl1.getArcList().size());
 		Assertions.assertEquals(3, t1.getArcInList().size());
 		Assertions.assertEquals(1, t1.getArcOutList().size());
+		Assertions.assertEquals(4, pn1.getArcList().size());
 		
-		pn0.removeArc(a2);
+		pn1.removeArc(a2);
 		Assertions.assertEquals(0, t1.getArcOutList().size());
 		Assertions.assertEquals(3, pl1.getArcList().size());
+		Assertions.assertEquals(3, pn1.getArcList().size());
 		
-		/*pn0.removeArc(a1);
+		pn1.removeArc(a1);
 		Assertions.assertEquals(2, t1.getArcInList().size());
 		Assertions.assertEquals(2, pl1.getArcList().size());
+		Assertions.assertEquals(2, pn1.getArcList().size());
 		
-		pn0.removeArc(a3);
+		pn1.removeArc(a3);
 		Assertions.assertEquals(1, t1.getArcInList().size());
 		Assertions.assertEquals(1, pl1.getArcList().size());
+		Assertions.assertEquals(1, pn1.getArcList().size());
 		
-		pn0.removeArc(a4);
+		pn1.removeArc(a4);
 		Assertions.assertEquals(0, t1.getArcInList().size());
-		Assertions.assertEquals(0, pl1.getArcList().size());*/
+		Assertions.assertEquals(0, pl1.getArcList().size());
+		Assertions.assertEquals(0, pn1.getArcList().size());
 	}
 	
 	@Test
