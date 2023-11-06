@@ -53,45 +53,51 @@ public class PetriNet implements PetriNetInterface {
 	}
 	
 
-	public void addArc(String type, int weight, Place p, Transition t) throws Exception, NegativeWeightException{
+	public Arc addArc(String type, int weight, Place p, Transition t) throws Exception, NegativeWeightException{
 		if (weight<0) {
 			throw new NegativeWeightException("WARNING: An arc can not have a negative weight.");
 		}
 		if (type == "in") {
 			ArcIn newArcIn = new ArcIn(weight, p, t);
 			this.arcList.add(newArcIn);
+			return newArcIn;
 		}
 		else if (type == "out") {
 			ArcOut newArcOut = new ArcOut(weight, p, t);
 			this.arcList.add(newArcOut);
+			return newArcOut;
 		}
 		else {
 			throw new Exception("Ce type d'arc n'existe pas/Pas assez d'arguments");
 		}
 	}
 	
-	public void addArc(String type, Place p, Transition t) throws Exception {
+	public Arc addArc(String type, Place p, Transition t) throws Exception {
 		if (type == "emptying") {
 			ArcEmptying newArcEmptying = new ArcEmptying(p, t); 
 			this.arcList.add(newArcEmptying);
+			return newArcEmptying;
 		}
 		else if (type == "zero") {
 			ArcZero newArcZero = new ArcZero(p,t);
 			this.arcList.add(newArcZero);
+			return newArcZero;
 		}
 		else { 
 			throw new Exception("Ce type d'arc n'existe pas/Trop d'arguments");
 		}
 	}
 
-	public void addPlace(int tokens) {
+	public Place addPlace(int tokens) {
 		Place newPlace = new Place(tokens);
 		this.placeList.add(newPlace);
+		return newPlace;
 	}
 
-	public void addTransition() {
+	public Transition addTransition() {
 		Transition t = new Transition();
 		transitionList.add(t);
+		return t;
 	}
 
 	public void removePlace(Place p) {
