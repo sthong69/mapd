@@ -14,6 +14,7 @@ public class ArcIn extends Arc {
 		setPlace(place);
 		setTransition(transition);
 		updateTransition(transition);
+		updatePlace(place);
 	}
 	
 	public ArcIn(Place place, Transition transition) throws NegativeWeightException{
@@ -22,6 +23,10 @@ public class ArcIn extends Arc {
 	
 	private void updateTransition(Transition transition) {
 		transition.addArcIn(this);
+	}
+	
+	private void updatePlace(Place place) {
+		place.addArc(this);
 	}
 
 	public void startExchange() throws NegativeNbTokensException {

@@ -68,7 +68,7 @@ public class PetriNet implements PetriNetInterface {
 			return newArcOut;
 		}
 		else {
-			throw new Exception("Ce type d'arc n'existe pas/Pas assez d'arguments");
+			throw new Exception("This type of arc does not exist/Not enough arguments");
 		}
 	}
 	
@@ -84,7 +84,7 @@ public class PetriNet implements PetriNetInterface {
 			return newArcZero;
 		}
 		else { 
-			throw new Exception("Ce type d'arc n'existe pas/Trop d'arguments");
+			throw new Exception("This type of arc does not exist/Not enough arguments");
 		}
 	}
 
@@ -110,9 +110,10 @@ public class PetriNet implements PetriNetInterface {
 	public void removeArc(Arc a) {
 		if (a instanceof ArcIn) {
 			a.getTransition().removeArcIn((ArcIn) a);
-		}
+			a.getPlace().removeArc(a);		}
 		else if (a instanceof ArcOut) {
 			a.getTransition().removeArcOut((ArcOut) a);
+			a.getPlace().removeArc(a);
 		}
 		this.arcList.remove(a);		
 	}

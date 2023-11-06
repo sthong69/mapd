@@ -13,6 +13,7 @@ public class ArcOut extends Arc {
 		setPlace(place);
 		setTransition(transition);
 		updateTransition(transition);
+		updatePlace(place);
 	}
 	
 	public ArcOut(Place place, Transition transition) throws NegativeWeightException{
@@ -21,6 +22,10 @@ public class ArcOut extends Arc {
 	
 	private void updateTransition(Transition transition) {
 		transition.addArcOut(this);
+	}
+	
+	private void updatePlace(Place place) {
+		place.addArc(this);
 	}
 
 	public void startExchange() throws NegativeNbTokensException{

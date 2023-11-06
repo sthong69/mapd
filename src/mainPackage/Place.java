@@ -46,6 +46,14 @@ public class Place {
 		nbTokens -= nbTokensToRemove;
 	}
 	
+	public void addArc(Arc arc) {
+		this.arcList.add(arc);
+	}
+	
+	public void removeArc(Arc arc) {
+		this.arcList.remove(arc);
+	}
+	
 	public boolean isEmpty() {
 		return (nbTokens == 0);
 	}
