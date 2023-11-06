@@ -1,6 +1,7 @@
 package mainPackage;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class Transition {
 	
@@ -48,7 +49,7 @@ public class Transition {
 		int counter;
 		int totalWeight;
 		LinkedList<Place> treatedPlaces;
-		LinkedList<ArcIn> treatedArcs;
+		List treatedArcs;
 		for (ArcIn arc : this.getArcInList()) {
 			counter = 0;
 			totalWeight = 0;
@@ -57,23 +58,23 @@ public class Transition {
 			if (!(treatedPlaces.contains(arc.getPlace()))) {
 				treatedPlaces.add(arc.getPlace());
 				for (Arc checkedArc : arc.getPlace().getArcList()) {
-					if (checkedArc instanceof ArcIn && checkedArc.getTransition() == this) {
+					if (checkedArc instanceof ArcIn && this.getArcInList().contains(checkedArc)) {
 						counter += 1;
-						treatedArcs.add((ArcIn) checkedArc);
+						treatedArcs.add(checkedArc);
 					}
-				if (counter == 1 && !(arc.checkAvailability())) {
-					return false;
-				} else if (counter != 1) {
-					for (ArcIn treatedArc : treatedArcs) {
-						totalWeight += treatedArc.getWeight();
-					}
-					if (totalWeight > treatedArcs.getFirst().getPlace().getNbTokens()) {
+					if (counter == 1 && !(arc.checkAvailability())) {
 						return false;
-							}
+					} else if (counter != 1) {
+						for (Object treatedArc : treatedArcs) {
+							totalWeight += ((ArcIn) treatedArc).getWeight();
+						}
+						if (totalWeight > ((LinkedList<ArcIn>) treatedArcs).getFirst().getPlace().getNbTokens()) {
+							return false;
 						}
 					}
 				}
 			}
+		}
 		return true;
 	}
 	

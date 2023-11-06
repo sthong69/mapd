@@ -79,6 +79,7 @@ public class TestTransition {
 		ArcEmptying a33 = new ArcEmptying(p13,t3);
 		
 		Assertions.assertTrue(t0.isDrawable());
+		System.out.println(t1.isDrawable());
 		Assertions.assertFalse(t1.isDrawable());
 		Assertions.assertFalse(t2.isDrawable());
 		Assertions.assertFalse(t3.isDrawable());
