@@ -22,9 +22,7 @@ public class TestArc {
 		t0 = new Transition();
 		a0 = new ArcIn(5, p0, t0);
 	}
-	
-
-	
+		
 	@Test
 	public void testGetter() {
 		Assertions.assertEquals(5, a0.getWeight());

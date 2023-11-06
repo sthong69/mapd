@@ -17,11 +17,13 @@ public class TestTransition {
 	static Transition t1;
 	static Transition t2;
 	static Transition t3;
+	static Place p0;
 	
 	
 	@BeforeAll
 	public static void setup() {
 		t0 = new Transition();
+		p0 = new Place(0);
 	}
 	
 	@Test
@@ -34,8 +36,8 @@ public class TestTransition {
 	
 	@Test
 	public void testRemoveArcIn() throws NegativeWeightException {
-		ArcIn a0 = new ArcIn(null, t0);
-		ArcIn a1 = new ArcIn(null, t0);
+		ArcIn a0 = new ArcIn(p0, t0);
+		ArcIn a1 = new ArcIn(p0, t0);
 		t0.removeArcIn(a1);
 		Assertions.assertTrue(t0.getArcInList().contains(a0));
 		Assertions.assertFalse(t0.getArcInList().contains(a1));
@@ -43,8 +45,8 @@ public class TestTransition {
 	
 	@Test
 	public void testRemoveArcOut() throws NegativeWeightException {
-		ArcOut a0 = new ArcOut(null, t0);
-		ArcOut a1 = new ArcOut(null, t0);
+		ArcOut a0 = new ArcOut(p0, t0);
+		ArcOut a1 = new ArcOut(p0, t0);
 		t0.removeArcOut(a1);
 		Assertions.assertTrue(t0.getArcOutList().contains(a0));
 		Assertions.assertFalse(t0.getArcOutList().contains(a1));
