@@ -36,5 +36,4 @@ public class ArcIn extends Arc {
 	public boolean checkAvailability() {
 		return (this.getWeight() <= this.getPlace().getNbTokens());
 	}
-
 }
