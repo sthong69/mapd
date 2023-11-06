@@ -45,13 +45,35 @@ public class Transition {
 	}
 	
 	public boolean isDrawable() {
-		boolean test;
-		for (ArcIn arc : this.arcInList) {
-			test = arc.checkAvailability();
-			if (!test) {
-				return false;
+		int counter;
+		int totalWeight;
+		LinkedList<Place> treatedPlaces;
+		LinkedList<ArcIn> treatedArcs;
+		for (ArcIn arc : this.getArcInList()) {
+			counter = 0;
+			totalWeight = 0;
+			treatedPlaces = new LinkedList<Place>();
+			treatedArcs = new LinkedList<ArcIn>();
+			if (!(treatedPlaces.contains(arc.getPlace()))) {
+				treatedPlaces.add(arc.getPlace());
+				for (Arc checkedArc : arc.getPlace().getArcList()) {
+					if (checkedArc instanceof ArcIn && checkedArc.getTransition() == this) {
+						counter += 1;
+						treatedArcs.add((ArcIn) checkedArc);
+					}
+				if (counter == 1 && !(arc.checkAvailability())) {
+					return false;
+				} else if (counter != 1) {
+					for (ArcIn treatedArc : treatedArcs) {
+						totalWeight += treatedArc.getWeight();
+					}
+					if (totalWeight > treatedArcs.getFirst().getPlace().getNbTokens()) {
+						return false;
+							}
+						}
+					}
+				}
 			}
-		}
 		return true;
 	}
 	
