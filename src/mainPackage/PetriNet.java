@@ -52,8 +52,15 @@ public class PetriNet implements PetriNetInterface {
 		this.transitionList = transitionList;
 	}
 	
-
 	public Arc addArc(String type, int weight, Place p, Transition t) throws Exception, NegativeWeightException{
+		if (!(treatExistingArc(weight,p,t))) {
+			throw new Exception("Can't create an arc if there is already an existing zero/emptying one between the same place and transition.");
+		}
+		Arc treatedArc = findExistingArc(p,t);
+		if (treatedArc != null){
+			System.out.println("There was already an arc between the designated place and transition. The weight of the former one has been updated");
+			return findExistingArc(p,t);
+		}
 		if (weight<0) {
 			throw new NegativeWeightException("WARNING: An arc can not have a negative weight.");
 		}
@@ -73,6 +80,9 @@ public class PetriNet implements PetriNetInterface {
 	}
 	
 	public Arc addArc(String type, Place p, Transition t) throws Exception {
+		if (!(treatExistingArc(-1,p,t))) {
+			throw new Exception("Can't create an emptying/zero arc if there is already an existing one between the same place and transition.");
+		}
 		if (type == "emptying") {
 			ArcEmptying newArcEmptying = new ArcEmptying(p, t); 
 			this.arcList.add(newArcEmptying);
@@ -86,6 +96,28 @@ public class PetriNet implements PetriNetInterface {
 		else { 
 			throw new Exception("This type of arc does not exist/Not enough arguments");
 		}
+	}
+	
+	public boolean treatExistingArc(int weight, Place p, Transition t) {
+		Arc testedArc = findExistingArc(p,t);
+		if (testedArc == null) {
+			return false;
+		} else {
+			if (weight == -1) {
+				return false;
+			}
+			testedArc.setWeight(testedArc.getWeight()+weight);
+			return true;
+		}
+	}
+	
+	public Arc findExistingArc(Place p, Transition t) {
+		for (Arc testedArc : arcList) {
+			if (testedArc.getPlace() == p && testedArc.getTransition() == t) {
+				return testedArc;
+			}
+		}
+		return null;
 	}
 
 	public Place addPlace(int tokens) {
@@ -110,7 +142,8 @@ public class PetriNet implements PetriNetInterface {
 	public void removeArc(Arc a) {
 		if (a instanceof ArcIn) {
 			a.getTransition().removeArcIn((ArcIn) a);
-			a.getPlace().removeArc(a);		}
+			a.getPlace().removeArc(a);		
+		}
 		else if (a instanceof ArcOut) {
 			a.getTransition().removeArcOut((ArcOut) a);
 			a.getPlace().removeArc(a);
