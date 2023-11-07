@@ -240,8 +240,8 @@ public class TestPetriNet {
 		Place p82 = pn8.addPlace(0);
 		Arc a82 = pn8.addArc("out", 1, p82, t8);
 		pn8.fire();
-		Assertions.assertEquals(0, p71.getNbTokens());
-		Assertions.assertEquals(1, p72.getNbTokens());
+		Assertions.assertEquals(0, p81.getNbTokens());
+		Assertions.assertEquals(1, p82.getNbTokens());
 		
 		// RM2
 		PetriNet pn9 = new PetriNet("");
@@ -279,7 +279,171 @@ public class TestPetriNet {
 	*/
 	@Test
 	public void testFireMultipleEntries() throws Exception {
+		// RMD0
+		PetriNet pn0 = new PetriNet("");
+		Transition t0 = pn0.addTransition();
+		Place p01 = pn0.addPlace(0);
+		Arc a01 = pn0.addArc("in", 1, p01, t0);
+		Place p02 = pn0.addPlace(0);
+		Arc a02 = pn0.addArc("in", 1, p02, t0);
+		pn0.fire();
+		Assertions.assertEquals(0, a01.getWeight());
+		Assertions.assertEquals(0, a02.getWeight());
 		
+		// RMD1
+		PetriNet pn1 = new PetriNet("");
+		Transition t1 = pn1.addTransition();
+		Place p11 = pn1.addPlace(1);
+		Arc a11 = pn1.addArc("in", 1, p11, t1);
+		Place p12 = pn1.addPlace(0);
+		Arc a12 = pn1.addArc("in", 1, p12, t1);
+		pn1.fire();
+		Assertions.assertEquals(1, a11.getWeight());
+		Assertions.assertEquals(0, a12.getWeight());
+		
+		// RMD2
+		PetriNet pn2 = new PetriNet("");
+		Transition t2 = pn2.addTransition();
+		Place p21 = pn2.addPlace(0);
+		Arc a21 = pn2.addArc("in", 1, p21, t2);
+		Place p22 = pn2.addPlace(1);
+		Arc a22 = pn2.addArc("in", 1, p22, t2);
+		pn2.fire();
+		Assertions.assertEquals(0, a21.getWeight());
+		Assertions.assertEquals(1, a22.getWeight());
+		
+		// RMD3
+		PetriNet pn3 = new PetriNet("");
+		Transition t3 = pn3.addTransition();
+		Place p31 = pn3.addPlace(1);
+		Arc a31 = pn3.addArc("in", 1, p31, t3);
+		Place p32 = pn3.addPlace(1);
+		Arc a32 = pn3.addArc("in", 1, p32, t3);
+		pn3.fire();
+		Assertions.assertEquals(0, a31.getWeight());
+		Assertions.assertEquals(0, a32.getWeight());
+		
+		// RMD4
+		PetriNet pn4 = new PetriNet("");
+		Transition t4 = pn4.addTransition();
+		Place p41 = pn4.addPlace(1);
+		Arc a41 = pn4.addArc("in", 3, p41, t4);
+		Place p42 = pn4.addPlace(1);
+		Arc a42 = pn4.addArc("in", 1, p42, t4);
+		pn4.fire();
+		Assertions.assertEquals(1, a41.getWeight());
+		Assertions.assertEquals(1, a42.getWeight());
+		
+		// RMD5
+		PetriNet pn5 = new PetriNet("");
+		Transition t5 = pn5.addTransition();
+		Place p51 = pn5.addPlace(3);
+		Arc a51 = pn5.addArc("in", 3, p51, t5);
+		Place p52 = pn5.addPlace(1);
+		Arc a52 = pn5.addArc("in", 1, p52, t5);
+		pn5.fire();
+		Assertions.assertEquals(0, a51.getWeight());
+		Assertions.assertEquals(0, a52.getWeight());
+		
+		// RMV0
+		PetriNet pn6 = new PetriNet("");
+		Transition t6 = pn6.addTransition();
+		Place p61 = pn6.addPlace(0);
+		Arc a61 = pn6.addArc("emptying", p61, t6);
+		Place p62 = pn6.addPlace(1);
+		Arc a62 = pn6.addArc("in", 1, p62, t6);
+		pn6.fire();
+		Assertions.assertEquals(0, a61.getWeight());
+		Assertions.assertEquals(1, a62.getWeight());
+		
+		// RMV1
+		PetriNet pn7 = new PetriNet("");
+		Transition t7 = pn7.addTransition();
+		Place p71 = pn7.addPlace(3);
+		Arc a71 = pn7.addArc("emptying", p71, t7);
+		Place p72 = pn7.addPlace(1);
+		Arc a72 = pn7.addArc("in", 1, p72, t7);
+		pn7.fire();
+		Assertions.assertEquals(0, a71.getWeight());
+		Assertions.assertEquals(0, a72.getWeight());
+		
+		// RMZ0
+		PetriNet pn8 = new PetriNet("");
+		Transition t8 = pn8.addTransition();
+		Place p81 = pn8.addPlace(1);
+		Arc a81 = pn8.addArc("zero", p81, t8);
+		Place p82 = pn8.addPlace(1);
+		Arc a82 = pn8.addArc("in", 1, p82, t8);
+		pn8.fire();
+		Assertions.assertEquals(1, a81.getWeight());
+		Assertions.assertEquals(1, a82.getWeight());
+		
+		// RMZ1
+		PetriNet pn9 = new PetriNet("");
+		Transition t9 = pn9.addTransition();
+		Place p91 = pn9.addPlace(0);
+		Arc a91 = pn9.addArc("zero", p91, t9);
+		Place p92 = pn9.addPlace(1);
+		Arc a92 = pn9.addArc("in", 1, p92, t9);
+		pn9.fire();
+		Assertions.assertEquals(0, a91.getWeight());
+		Assertions.assertEquals(0, a92.getWeight());
+		
+		// RMM0
+		PetriNet pn10 = new PetriNet("");
+		Transition t10 = pn10.addTransition();
+		Place p101 = pn10.addPlace(0);
+		Arc a101 = pn10.addArc("in", 1, p101, t10);
+		Place p102 = pn10.addPlace(0);
+		Arc a102 = pn10.addArc("in", 1, p102, t10);
+		Place p103 = pn10.addPlace(0);
+		Arc a103 = pn10.addArc("out", 1, p103, t10);
+		pn10.fire();
+		Assertions.assertEquals(0, a101.getWeight());
+		Assertions.assertEquals(0, a102.getWeight());
+		Assertions.assertEquals(0, a103.getWeight());
+		
+		// RMM1
+		PetriNet pn11 = new PetriNet("");
+		Transition t11 = pn11.addTransition();
+		Place p111 = pn11.addPlace(1);
+		Arc a111 = pn11.addArc("in", 1, p111, t11);
+		Place p112 = pn11.addPlace(0);
+		Arc a112 = pn11.addArc("in", 1, p112, t11);
+		Place p113 = pn11.addPlace(0);
+		Arc a113 = pn11.addArc("out", 1, p113, t11);
+		pn11.fire();
+		Assertions.assertEquals(1, a111.getWeight());
+		Assertions.assertEquals(0, a112.getWeight());
+		Assertions.assertEquals(0, a113.getWeight());
+		
+		// RMM2
+		PetriNet pn12 = new PetriNet("");
+		Transition t12 = pn12.addTransition();
+		Place p121 = pn12.addPlace(1);
+		Arc a121 = pn12.addArc("in", 1, p121, t12);
+		Place p122 = pn12.addPlace(1);
+		Arc a122 = pn12.addArc("in", 1, p122, t12);
+		Place p123 = pn12.addPlace(0);
+		Arc a123 = pn12.addArc("out", 1, p123, t12);
+		pn12.fire();
+		Assertions.assertEquals(0, a121.getWeight());
+		Assertions.assertEquals(0, a122.getWeight());
+		Assertions.assertEquals(1, a123.getWeight());
+		
+		// RMM3
+		PetriNet pn13 = new PetriNet("");
+		Transition t13 = pn13.addTransition();
+		Place p131 = pn13.addPlace(1);
+		Arc a131 = pn13.addArc("in", 1, p131, t13);
+		Place p132 = pn13.addPlace(1);
+		Arc a132 = pn13.addArc("in", 1, p132, t13);
+		Place p133 = pn13.addPlace(0);
+		Arc a133 = pn13.addArc("out", 3, p133, t13);
+		pn13.fire();
+		Assertions.assertEquals(0, a131.getWeight());
+		Assertions.assertEquals(0, a132.getWeight());
+		Assertions.assertEquals(3, a133.getWeight());
 	}
 	
 	@Test
