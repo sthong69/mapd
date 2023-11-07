@@ -175,15 +175,16 @@ public class PetriNet implements PetriNetInterface {
 				possibleTransition.add(tempTransition);
 			}
 		}
+		if (possibleTransition.size() != 0) {
+			Transition drawnTransition = possibleTransition.get(new Random().nextInt(possibleTransition.size()));
+			
+			for (ArcIn tempArc : drawnTransition.getArcInList()) {
+				tempArc.startExchange();
+			}
 
-		Transition drawnTransition = possibleTransition.get(new Random().nextInt(possibleTransition.size()));
-		
-		for (ArcIn tempArc : drawnTransition.getArcInList()) {
-			tempArc.startExchange();
-		}
-
-		for (ArcOut tempArc : drawnTransition.getArcOutList()) {
-			tempArc.startExchange();
+			for (ArcOut tempArc : drawnTransition.getArcOutList()) {
+				tempArc.startExchange();
+			}
 		}
 }
 	

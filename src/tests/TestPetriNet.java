@@ -240,8 +240,8 @@ public class TestPetriNet {
 		Place p82 = pn8.addPlace(0);
 		Arc a82 = pn8.addArc("out", 1, p82, t8);
 		pn8.fire();
-		Assertions.assertEquals(0, p71.getNbTokens());
-		Assertions.assertEquals(1, p72.getNbTokens());
+		Assertions.assertEquals(0, p81.getNbTokens());
+		Assertions.assertEquals(1, p82.getNbTokens());
 		
 		// RM2
 		PetriNet pn9 = new PetriNet("");
