@@ -171,19 +171,7 @@ public class PetriNet implements PetriNetInterface {
 		LinkedList<Transition> possibleTransition = new LinkedList<Transition>();
 
 		for (Transition tempTransition : this.transitionList) {
-			boolean test = true;
-			int i = 0;
-			LinkedList<ArcIn> arcInList = tempTransition.getArcInList();
-
-			while (test && i<arcInList.size()) {
-
-				if (arcInList.get(i).checkAvailability()) {
-					test = false;
-				}
-
-				i++;
-			}
-			if (i==arcInList.size()) {
+			if (tempTransition.isDrawable()) {
 				possibleTransition.add(tempTransition);
 			}
 		}
