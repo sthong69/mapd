@@ -287,8 +287,8 @@ public class TestPetriNet {
 		Place p02 = pn0.addPlace(0);
 		Arc a02 = pn0.addArc("in", 1, p02, t0);
 		pn0.fire();
-		Assertions.assertEquals(0, a01.getWeight());
-		Assertions.assertEquals(0, a02.getWeight());
+		Assertions.assertEquals(0, p01.getNbTokens());
+		Assertions.assertEquals(0, p02.getNbTokens());
 		
 		// RMD1
 		PetriNet pn1 = new PetriNet("");
@@ -298,8 +298,8 @@ public class TestPetriNet {
 		Place p12 = pn1.addPlace(0);
 		Arc a12 = pn1.addArc("in", 1, p12, t1);
 		pn1.fire();
-		Assertions.assertEquals(1, a11.getWeight());
-		Assertions.assertEquals(0, a12.getWeight());
+		Assertions.assertEquals(1, p11.getNbTokens());
+		Assertions.assertEquals(0, p12.getNbTokens());
 		
 		// RMD2
 		PetriNet pn2 = new PetriNet("");
@@ -309,8 +309,8 @@ public class TestPetriNet {
 		Place p22 = pn2.addPlace(1);
 		Arc a22 = pn2.addArc("in", 1, p22, t2);
 		pn2.fire();
-		Assertions.assertEquals(0, a21.getWeight());
-		Assertions.assertEquals(1, a22.getWeight());
+		Assertions.assertEquals(0, p21.getNbTokens());
+		Assertions.assertEquals(1, p22.getNbTokens());
 		
 		// RMD3
 		PetriNet pn3 = new PetriNet("");
@@ -320,8 +320,8 @@ public class TestPetriNet {
 		Place p32 = pn3.addPlace(1);
 		Arc a32 = pn3.addArc("in", 1, p32, t3);
 		pn3.fire();
-		Assertions.assertEquals(0, a31.getWeight());
-		Assertions.assertEquals(0, a32.getWeight());
+		Assertions.assertEquals(0, p31.getNbTokens());
+		Assertions.assertEquals(0, p32.getNbTokens());
 		
 		// RMD4
 		PetriNet pn4 = new PetriNet("");
@@ -331,8 +331,8 @@ public class TestPetriNet {
 		Place p42 = pn4.addPlace(1);
 		Arc a42 = pn4.addArc("in", 1, p42, t4);
 		pn4.fire();
-		Assertions.assertEquals(1, a41.getWeight());
-		Assertions.assertEquals(1, a42.getWeight());
+		Assertions.assertEquals(1, p41.getNbTokens());
+		Assertions.assertEquals(1, p42.getNbTokens());
 		
 		// RMD5
 		PetriNet pn5 = new PetriNet("");
@@ -342,8 +342,8 @@ public class TestPetriNet {
 		Place p52 = pn5.addPlace(1);
 		Arc a52 = pn5.addArc("in", 1, p52, t5);
 		pn5.fire();
-		Assertions.assertEquals(0, a51.getWeight());
-		Assertions.assertEquals(0, a52.getWeight());
+		Assertions.assertEquals(0, p51.getNbTokens());
+		Assertions.assertEquals(0, p52.getNbTokens());
 		
 		// RMV0
 		PetriNet pn6 = new PetriNet("");
@@ -353,8 +353,8 @@ public class TestPetriNet {
 		Place p62 = pn6.addPlace(1);
 		Arc a62 = pn6.addArc("in", 1, p62, t6);
 		pn6.fire();
-		Assertions.assertEquals(0, a61.getWeight());
-		Assertions.assertEquals(1, a62.getWeight());
+		Assertions.assertEquals(0, p61.getNbTokens());
+		Assertions.assertEquals(1, p62.getNbTokens());
 		
 		// RMV1
 		PetriNet pn7 = new PetriNet("");
@@ -364,8 +364,8 @@ public class TestPetriNet {
 		Place p72 = pn7.addPlace(1);
 		Arc a72 = pn7.addArc("in", 1, p72, t7);
 		pn7.fire();
-		Assertions.assertEquals(0, a71.getWeight());
-		Assertions.assertEquals(0, a72.getWeight());
+		Assertions.assertEquals(0, p71.getNbTokens());
+		Assertions.assertEquals(0, p72.getNbTokens());
 		
 		// RMZ0
 		PetriNet pn8 = new PetriNet("");
@@ -375,8 +375,8 @@ public class TestPetriNet {
 		Place p82 = pn8.addPlace(1);
 		Arc a82 = pn8.addArc("in", 1, p82, t8);
 		pn8.fire();
-		Assertions.assertEquals(1, a81.getWeight());
-		Assertions.assertEquals(1, a82.getWeight());
+		Assertions.assertEquals(1, p81.getNbTokens());
+		Assertions.assertEquals(1, p82.getNbTokens());
 		
 		// RMZ1
 		PetriNet pn9 = new PetriNet("");
@@ -386,8 +386,8 @@ public class TestPetriNet {
 		Place p92 = pn9.addPlace(1);
 		Arc a92 = pn9.addArc("in", 1, p92, t9);
 		pn9.fire();
-		Assertions.assertEquals(0, a91.getWeight());
-		Assertions.assertEquals(0, a92.getWeight());
+		Assertions.assertEquals(0, p91.getNbTokens());
+		Assertions.assertEquals(0, p92.getNbTokens());
 		
 		// RMM0
 		PetriNet pn10 = new PetriNet("");
@@ -399,9 +399,9 @@ public class TestPetriNet {
 		Place p103 = pn10.addPlace(0);
 		Arc a103 = pn10.addArc("out", 1, p103, t10);
 		pn10.fire();
-		Assertions.assertEquals(0, a101.getWeight());
-		Assertions.assertEquals(0, a102.getWeight());
-		Assertions.assertEquals(0, a103.getWeight());
+		Assertions.assertEquals(0, p101.getNbTokens());
+		Assertions.assertEquals(0, p102.getNbTokens());
+		Assertions.assertEquals(0, p103.getNbTokens());
 		
 		// RMM1
 		PetriNet pn11 = new PetriNet("");
@@ -413,9 +413,9 @@ public class TestPetriNet {
 		Place p113 = pn11.addPlace(0);
 		Arc a113 = pn11.addArc("out", 1, p113, t11);
 		pn11.fire();
-		Assertions.assertEquals(1, a111.getWeight());
-		Assertions.assertEquals(0, a112.getWeight());
-		Assertions.assertEquals(0, a113.getWeight());
+		Assertions.assertEquals(1, p111.getNbTokens());
+		Assertions.assertEquals(0, p112.getNbTokens());
+		Assertions.assertEquals(0, p113.getNbTokens());
 		
 		// RMM2
 		PetriNet pn12 = new PetriNet("");
@@ -427,9 +427,9 @@ public class TestPetriNet {
 		Place p123 = pn12.addPlace(0);
 		Arc a123 = pn12.addArc("out", 1, p123, t12);
 		pn12.fire();
-		Assertions.assertEquals(0, a121.getWeight());
-		Assertions.assertEquals(0, a122.getWeight());
-		Assertions.assertEquals(1, a123.getWeight());
+		Assertions.assertEquals(0, p121.getNbTokens());
+		Assertions.assertEquals(0, p122.getNbTokens());
+		Assertions.assertEquals(1, p123.getNbTokens());
 		
 		// RMM3
 		PetriNet pn13 = new PetriNet("");
@@ -441,9 +441,9 @@ public class TestPetriNet {
 		Place p133 = pn13.addPlace(0);
 		Arc a133 = pn13.addArc("out", 3, p133, t13);
 		pn13.fire();
-		Assertions.assertEquals(0, a131.getWeight());
-		Assertions.assertEquals(0, a132.getWeight());
-		Assertions.assertEquals(3, a133.getWeight());
+		Assertions.assertEquals(0, p131.getNbTokens());
+		Assertions.assertEquals(0, p132.getNbTokens());
+		Assertions.assertEquals(3, p133.getNbTokens());
 	}
 	
 	@Test
