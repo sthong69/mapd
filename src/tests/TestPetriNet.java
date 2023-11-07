@@ -162,7 +162,6 @@ public class TestPetriNet {
 		Assertions.assertEquals(0, pn1.getArcList().size());
 
 	}
-	/*
 	@Test
 	public void testFireSingleEntry() throws Exception {
 		// RD0
@@ -276,7 +275,6 @@ public class TestPetriNet {
 		Assertions.assertEquals(2, p111.getNbTokens());
 		Assertions.assertEquals(3, p112.getNbTokens());
 	}
-	*/
 	@Test
 	public void testFireMultipleEntries() throws Exception {
 		// RMD0
