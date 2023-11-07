@@ -53,11 +53,11 @@ public class PetriNet implements PetriNetInterface {
 	}
 	
 	public Arc addArc(String type, int weight, Place p, Transition t) throws Exception, NegativeWeightException{
-		if ((treatExistingArc(weight,p,t))) {
+		int test = treatExistingArc(type,weight,p,t);
+		if (test == 1) {
 			throw new Exception("Can't create an arc if there is already an existing zero/emptying one between the same place and transition.");
 		}
-		Arc treatedArc = findExistingArc(p,t);
-		if (treatedArc != null){
+		if (test==3){
 			System.out.println("There was already an arc between the designated place and transition. The weight of the former one has been updated");
 			return findExistingArc(p,t);
 		}
@@ -65,11 +65,17 @@ public class PetriNet implements PetriNetInterface {
 			throw new NegativeWeightException("WARNING: An arc can not have a negative weight.");
 		}
 		if (type == "in") {
+			if (test == 2) {
+				throw new Exception("Can't create an arcIn if there is already an existing arcOut between the same place and transition.");
+			}
 			ArcIn newArcIn = new ArcIn(weight, p, t);
 			this.arcList.add(newArcIn);
 			return newArcIn;
 		}
 		else if (type == "out") {
+			if (test == 2) {
+				throw new Exception("Can't create an arcOut if there is already an existing arcIn between the same place and transition.");
+			}
 			ArcOut newArcOut = new ArcOut(weight, p, t);
 			this.arcList.add(newArcOut);
 			return newArcOut;
@@ -80,9 +86,10 @@ public class PetriNet implements PetriNetInterface {
 	}
 	
 	public Arc addArc(String type, Place p, Transition t) throws Exception {
-		if ((treatExistingArc(-1,p,t))) {
-			throw new Exception("Can't create an emptying/zero arc if there is already an existing one between the same place and transition.");
+		if (treatExistingArc(type,-1,p,t) == 1) {
+			throw new Exception("Can't create an emptying/zero arc if there is already an existing arc between the same place and transition.");
 		}
+		
 		if (type == "emptying") {
 			ArcEmptying newArcEmptying = new ArcEmptying(p, t); 
 			this.arcList.add(newArcEmptying);
@@ -98,17 +105,29 @@ public class PetriNet implements PetriNetInterface {
 		}
 	}
 	
-	public boolean treatExistingArc(int weight, Place p, Transition t) {
+	public int treatExistingArc(String type, int weight, Place p, Transition t) {
 		Arc testedArc = findExistingArc(p,t);
+		
 		if (testedArc == null) {
-			return false;
-		} else {
-			if (weight == -1) {
-				return true;
-			}
-			testedArc.setWeight(testedArc.getWeight()+weight);
-			return true;
+			return 0;
 		}
+		
+		else if (testedArc instanceof ArcZero || testedArc instanceof ArcEmptying) {
+				return 1;
+		}
+		
+		else if (weight == -1) {
+			return 1;
+		}
+		
+		else if ((type == "int" && testedArc instanceof ArcOut) || (type == "out" && testedArc instanceof ArcIn)){
+			return 2;
+		}
+		
+		else {
+			testedArc.setWeight(testedArc.getWeight()+weight);
+			return 3;
+		}		
 	}
 	
 	public Arc findExistingArc(Place p, Transition t) {
