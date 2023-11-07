@@ -53,7 +53,7 @@ public class PetriNet implements PetriNetInterface {
 	}
 	
 	public Arc addArc(String type, int weight, Place p, Transition t) throws Exception, NegativeWeightException{
-		if (!(treatExistingArc(weight,p,t))) {
+		if ((treatExistingArc(weight,p,t))) {
 			throw new Exception("Can't create an arc if there is already an existing zero/emptying one between the same place and transition.");
 		}
 		Arc treatedArc = findExistingArc(p,t);
@@ -80,7 +80,7 @@ public class PetriNet implements PetriNetInterface {
 	}
 	
 	public Arc addArc(String type, Place p, Transition t) throws Exception {
-		if (!(treatExistingArc(-1,p,t))) {
+		if ((treatExistingArc(-1,p,t))) {
 			throw new Exception("Can't create an emptying/zero arc if there is already an existing one between the same place and transition.");
 		}
 		if (type == "emptying") {
@@ -104,7 +104,7 @@ public class PetriNet implements PetriNetInterface {
 			return false;
 		} else {
 			if (weight == -1) {
-				return false;
+				return true;
 			}
 			testedArc.setWeight(testedArc.getWeight()+weight);
 			return true;
@@ -147,7 +147,8 @@ public class PetriNet implements PetriNetInterface {
 	}
 	
 	public void removePlace(Place p) {
-		for (Arc tempArc : p.getArcList()) {
+		LinkedList<Arc> tempList = (LinkedList<Arc>) p.getArcList().clone();
+		for (Arc tempArc : tempList) {
 			removeArc(tempArc);
 		}
 		this.placeList.remove(p);

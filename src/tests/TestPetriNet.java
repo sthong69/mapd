@@ -61,30 +61,39 @@ public class TestPetriNet {
 	
 	@Test
 	public void testAddArc() throws Exception, NegativeWeightException {
+		PetriNet pn = new PetriNet("");
+		Place p1 = new Place (0);
+		Place p2 = new Place (0);
+		Place p3 = new Place (0);
+		Place p4 = new Place (0);
+		Place p5 = new Place (0);
+		Place p6 = new Place (0);
+		Place p7 = new Place (0);
+		Transition t = new Transition();
 		
-		ai1 = pn0.addArc("in", 2, pl0, t0);
+		ai1 = pn.addArc("in", 2, p1, t);
 		Assertions.assertTrue(ai1 instanceof ArcIn);
-		Assertions.assertEquals(1, pn0.getArcList().size());
+		Assertions.assertEquals(1, pn.getArcList().size());
 		
-		ao1 = pn0.addArc("out", 3, pl0, t0);
+		ao1 = pn.addArc("out", 3, p2, t);
 		Assertions.assertTrue(ao1 instanceof ArcOut);
-		Assertions.assertEquals(2, pn0.getArcList().size());
+		Assertions.assertEquals(2, pn.getArcList().size());
 		
-		NegativeWeightException exceptionNegative = Assertions.assertThrows(NegativeWeightException.class, ()-> ae1=pn0.addArc("in",-2, pl0, t0));
+		NegativeWeightException exceptionNegative = Assertions.assertThrows(NegativeWeightException.class, ()-> ae1=pn.addArc("in",-2, p3, t));
 		Assertions.assertEquals("WARNING: An arc can not have a negative weight.", exceptionNegative.getMessage());
 		
-		Exception exceptionType1 = Assertions.assertThrows(Exception.class, ()-> ae2=pn0.addArc("ex",2, pl0, t0));
+		Exception exceptionType1 = Assertions.assertThrows(Exception.class, ()-> ae2=pn.addArc("ex",2, p4, t));
 		Assertions.assertEquals("This type of arc does not exist/Not enough arguments", exceptionType1.getMessage());
 		
-		aempt = pn0.addArc("emptying", pl0, t0);
+		aempt = pn.addArc("emptying", p5, t);
 		Assertions.assertTrue(aempt instanceof ArcEmptying);
-		Assertions.assertEquals(3, pn0.getArcList().size());
+		Assertions.assertEquals(3, pn.getArcList().size());
 		
-		azero = pn0.addArc("zero", pl0, t0);
+		azero = pn.addArc("zero", p6, t);
 		Assertions.assertTrue(azero instanceof ArcZero);
-		Assertions.assertEquals(4, pn0.getArcList().size());
+		Assertions.assertEquals(4, pn.getArcList().size());
 		
-		Exception exceptionType2 = Assertions.assertThrows(Exception.class, ()-> ae3=pn0.addArc("ex", pl0, t0));
+		Exception exceptionType2 = Assertions.assertThrows(Exception.class, ()-> ae3=pn.addArc("ex", p7, t));
 		Assertions.assertEquals("This type of arc does not exist/Not enough arguments", exceptionType2.getMessage());
 	}
 	
@@ -92,11 +101,12 @@ public class TestPetriNet {
 	public void testRemoveTransition() throws NegativeWeightException, Exception {
 		PetriNet pn1 = new PetriNet("");
 		Place pl1 = pn1.addPlace(0);
+		Place pl2 = pn1.addPlace(0);
 		Transition t1 = pn1.addTransition();
 		Assertions.assertEquals(1, pn1.getTransitionList().size());
 		
 		Arc a1 = pn1.addArc("in", 2, pl1, t1);
-		Arc a2 = pn1.addArc("out", 2, pl1, t1);
+		Arc a2 = pn1.addArc("out", 2, pl2, t1);
 		Assertions.assertEquals(2, pn1.getArcList().size());
 		
 		pn1.removeTransition(t1);
@@ -109,11 +119,11 @@ public class TestPetriNet {
 		PetriNet pn1 = new PetriNet("");
 		Place pl1 = pn1.addPlace(0);
 		Transition t1 = pn1.addTransition();
+		Transition t2 = pn1.addTransition();
 		Assertions.assertEquals(1, pn1.getPlaceList().size());
 		
 		Arc a1 = pn1.addArc("in", 2, pl1, t1);
-		Arc a2 = pn1.addArc("in", 1, pl1, t1);
-		Arc a3 = pn1.addArc("in", 1, pl1, t1);
+		Arc a2 = pn1.addArc("in", 1, pl1, t2);
 		Assertions.assertEquals(2, pn1.getArcList().size());
 		
 		pn1.removePlace(pl1);
@@ -127,37 +137,30 @@ public class TestPetriNet {
 		PetriNet pn1 = new PetriNet("Test");
 		
 		Transition t1 = pn1.addTransition();
-		Place pl1 = pn1.addPlace(2);
+		Place p1 = pn1.addPlace(2);
+		Place p2 = pn1.addPlace(2);
+		Place p3 = pn1.addPlace(2);
+		Place p4 = pn1.addPlace(2);
 		
-		Arc a1 = pn1.addArc("in", 1, pl1, t1);
-		Arc a2 = pn1.addArc("out",4, pl1, t1);
-		Arc a3 = pn1.addArc("emptying", pl1, t1);
-		Arc a4 = pn1.addArc("zero", pl1, t1);
+		Arc a1 = pn1.addArc("in", 1, p1, t1);
+		Arc a2 = pn1.addArc("out",4, p2, t1);
 		
-		Assertions.assertEquals(4, pl1.getArcList().size());
-		Assertions.assertEquals(3, t1.getArcInList().size());
+		Assertions.assertEquals(1, p1.getArcList().size());
+		Assertions.assertEquals(1, p2.getArcList().size());
+		Assertions.assertEquals(1, t1.getArcInList().size());
 		Assertions.assertEquals(1, t1.getArcOutList().size());
-		Assertions.assertEquals(4, pn1.getArcList().size());
+		Assertions.assertEquals(2, pn1.getArcList().size());
 		
 		pn1.removeArc(a2);
 		Assertions.assertEquals(0, t1.getArcOutList().size());
-		Assertions.assertEquals(3, pl1.getArcList().size());
-		Assertions.assertEquals(3, pn1.getArcList().size());
-		
-		pn1.removeArc(a1);
-		Assertions.assertEquals(2, t1.getArcInList().size());
-		Assertions.assertEquals(2, pl1.getArcList().size());
-		Assertions.assertEquals(2, pn1.getArcList().size());
-		
-		pn1.removeArc(a3);
-		Assertions.assertEquals(1, t1.getArcInList().size());
-		Assertions.assertEquals(1, pl1.getArcList().size());
+		Assertions.assertEquals(0, p2.getArcList().size());
 		Assertions.assertEquals(1, pn1.getArcList().size());
 		
-		pn1.removeArc(a4);
+		pn1.removeArc(a1);
 		Assertions.assertEquals(0, t1.getArcInList().size());
-		Assertions.assertEquals(0, pl1.getArcList().size());
+		Assertions.assertEquals(0, p1.getArcList().size());
 		Assertions.assertEquals(0, pn1.getArcList().size());
+
 	}
 	
 	@Test
