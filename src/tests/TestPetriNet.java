@@ -162,7 +162,6 @@ public class TestPetriNet {
 		Assertions.assertEquals(0, pn1.getArcList().size());
 
 	}
-	
 	@Test
 	public void testFireSingleEntry() throws Exception {
 		// RD0
@@ -276,7 +275,7 @@ public class TestPetriNet {
 		Assertions.assertEquals(2, p111.getNbTokens());
 		Assertions.assertEquals(3, p112.getNbTokens());
 	}
-
+	*/
 	@Test
 	public void testFireMultipleEntries() throws Exception {
 		// RMD0
@@ -448,7 +447,7 @@ public class TestPetriNet {
 	
 	@Test
 	public void testArcDouble() throws Exception {
-		// CAF0
+		// CAD0
 		PetriNet pn0 = new PetriNet("");
 		Transition t0 = pn0.addTransition();
 		Place p0 = pn0.addPlace(0);
@@ -459,7 +458,7 @@ public class TestPetriNet {
 		Assertions.assertEquals(15, a0.getWeight());
 		Assertions.assertEquals(1, pn0.getArcList().size());
 		
-		// CAF1e
+		// CAD1e
 		PetriNet pn1 = new PetriNet("");
 		Transition t1 = pn1.addTransition();
 		Place p1 = pn1.addPlace(0);
@@ -468,27 +467,43 @@ public class TestPetriNet {
 		Exception exception1 = Assertions.assertThrows(Exception.class, ()->{Arc a1n = pn1.addArc("in", 5, p1, t1);});
 		Assertions.assertEquals("Can't create an arc if there is already an existing zero/emptying one between the same place and transition.", exception1.getMessage());
 		
-		// CAF2e CAF3e
+		// CAD2e CAD3e
 		PetriNet pn2 = new PetriNet("");
 		Transition t2 = pn2.addTransition();
 		Place p2 = pn2.addPlace(0);
-		Arc a2 = pn2.addArc("in", p2, t2);
+		Arc a2 = pn2.addArc("in", 2, p2, t2);
 		
 		Exception exception2 = Assertions.assertThrows(Exception.class, ()->{Arc a2n = pn2.addArc("zero", p2, t2);});
-		Assertions.assertEquals("Can't create an emptying/zero arc if there is already an existing one between the same place and transition.", exception2.getMessage());
+		Assertions.assertEquals("Can't create an emptying/zero arc if there is already an existing arc between the same place and transition.", exception2.getMessage());
 		
 		Exception exception3 = Assertions.assertThrows(Exception.class, ()->{Arc a2n = pn2.addArc("emptying", p2, t2);});
-		Assertions.assertEquals("Can't create an emptying/zero arc if there is already an existing one between the same place and transition.", exception2.getMessage());
+		Assertions.assertEquals("Can't create an emptying/zero arc if there is already an existing arc between the same place and transition.", exception2.getMessage());
 		
-		// CAF4
+		// CAD4
 		PetriNet pn4 = new PetriNet("");
 		Transition t4 = pn4.addTransition();
 		Place p4 = pn4.addPlace(0);
 		Arc a4 = pn4.addArc("out", 10, p4, t4);
 		
-		Arc a4n = pn4.addArc("in", 5, p4, t4);
+		Arc a4n = pn4.addArc("out", 5, p4, t4);
 		
 		Assertions.assertEquals(15, a4.getWeight());
 		Assertions.assertEquals(1, pn4.getArcList().size());
+		
+		//CAD5e CAD6e
+		PetriNet pn5 = new PetriNet("");
+		Transition t5 = pn5.addTransition();
+		Place p5 = pn5.addPlace(0);		
+		Arc a5 = pn5.addArc("in", 5, p5, t5);
+		
+		Transition t6 = pn5.addTransition();
+		Place p6 = pn5.addPlace(0);		
+		Arc a6 = pn5.addArc("out", 5, p6, t6);
+		
+		Exception exception5 = Assertions.assertThrows(Exception.class, ()->{Arc an5 = pn5.addArc("out", 5, p5, t5);});
+		Assertions.assertEquals("Can't create an arcOut if there is already an existing arcIn between the same place and transition.", exception5.getMessage());
+		
+		Exception exception6 = Assertions.assertThrows(Exception.class, ()->{Arc an6 = pn5.addArc("in", 5, p6, t6);});
+		Assertions.assertEquals("Can't create an arcIn if there is already an existing arcOut between the same place and transition.", exception6.getMessage());
 	}
 }

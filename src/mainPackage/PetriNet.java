@@ -120,7 +120,7 @@ public class PetriNet implements PetriNetInterface {
 			return 1;
 		}
 		
-		else if ((type == "int" && testedArc instanceof ArcOut) || (type == "out" && testedArc instanceof ArcIn)){
+		else if ((type == "in" && testedArc instanceof ArcOut) || (type == "out" && testedArc instanceof ArcIn)){
 			return 2;
 		}
 		
