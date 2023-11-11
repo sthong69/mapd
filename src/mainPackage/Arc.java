@@ -11,7 +11,8 @@ public abstract class Arc {
 
 
 	/**
-	 * @return weight
+	 * Gets the weight associated to this Arc.
+	 * @return The weight associated to this Arc.
 	 */
 	public int getWeight() { 
 		return weight;
@@ -19,7 +20,8 @@ public abstract class Arc {
 
 
 	/**
-	 * @param weight
+	 * Sets the weight associated to this Arc.
+	 * @param weight A weight to be associated with.
 	 */
 	public void setWeight(int weight) {
 		this.weight = weight;
@@ -27,7 +29,8 @@ public abstract class Arc {
 
 
 	/**
-	 * @return
+	 * Gets the Place associated to this Arc.
+	 * @return The Place associated to this Arc.
 	 */
 	public Place getPlace() {
 		return place;
@@ -35,7 +38,8 @@ public abstract class Arc {
 
 
 	/**
-	 * @param place
+	 * Sets the Place associated to this Arc.
+	 * @param place A Place to be associated with.
 	 */
 	public void setPlace(Place place) {
 		this.place = place;
@@ -43,8 +47,8 @@ public abstract class Arc {
 
 
 	/**
-	 * Get the transition associated to this Arc.
-	 * @return The transition associated to this Arc.
+	 * Gets the Transition associated to this Arc.
+	 * @return The Transition associated to this Arc.
 	 */
 	public Transition getTransition() {
 		return transition;
@@ -52,8 +56,8 @@ public abstract class Arc {
 
 
 	/**
-	 * Set the transition associated to this Arc.
-	 * @param A transition to be associated with.
+	 * Sets the Transition associated to this Arc.
+	 * @param transition A Transition to be associated with.
 	 */
 	public void setTransition(Transition transition) {
 		this.transition = transition;
