@@ -62,14 +62,14 @@ public class TestPetriNet {
 	@Test
 	public void testAddArc() throws Exception, NegativeWeightException {
 		PetriNet pn = new PetriNet("");
-		Place p1 = new Place (1, 0);
-		Place p2 = new Place (2, 0);
-		Place p3 = new Place (3, 0);
-		Place p4 = new Place (4, 0);
-		Place p5 = new Place (5, 0);
-		Place p6 = new Place (6, 0);
-		Place p7 = new Place (7, 0);
-		Transition t = new Transition(0);
+		Place p1 = pn.addPlace(0);
+		Place p2 = pn.addPlace(0);
+		Place p3 = pn.addPlace(0);
+		Place p4 = pn.addPlace(0);
+		Place p5 = pn.addPlace(0);
+		Place p6 = pn.addPlace(0);
+		Place p7 = pn.addPlace(0);
+		Transition t = pn.addTransition();
 		
 		ai1 = pn.addArc("in", 2, p1, t);
 		Assertions.assertTrue(ai1 instanceof ArcIn);
@@ -505,6 +505,30 @@ public class TestPetriNet {
 		
 		Exception exception6 = Assertions.assertThrows(Exception.class, ()->{Arc an6 = pn5.addArc("in", 5, p6, t6);});
 		Assertions.assertEquals("Can't create an arcIn if there is already an existing arcOut between the same place and transition.", exception6.getMessage());
+	}
+	
+	@Test
+	public void testSamePetriNet() throws Exception {
+		PetriNet pn0 = new PetriNet("");
+		PetriNet pn1 = new PetriNet("");
+		
+		Place p0 = pn0.addPlace(0);
+		Place p1 = pn1.addPlace(0);
+		
+		Transition t0 = pn0.addTransition();
+		Transition t1 = pn1.addTransition();
+		
+		pn0.addArc("in", 0, p0, t0);
+		pn1.addArc("in", 0, p1, t1);
+		
+		Exception exception1 =  Assertions.assertThrows(Exception.class, ()->{pn0.addArc("in", 0, p0, t1);});
+		Assertions.assertEquals("Can't create an arc if associated place and transition are not from the same PetriNet.", exception1.getMessage());
+		Exception exception2 =  Assertions.assertThrows(Exception.class, ()->{pn0.addArc("in", 0, p1, t0);});
+		Assertions.assertEquals("Can't create an arc if associated place and transition are not from the same PetriNet.", exception2.getMessage());
+		Exception exception3 =  Assertions.assertThrows(Exception.class, ()->{pn1.addArc("in", 0, p1, t0);});
+		Assertions.assertEquals("Can't create an arc if associated place and transition are not from the same PetriNet.", exception3.getMessage());
+		Exception exception4 =  Assertions.assertThrows(Exception.class, ()->{pn1.addArc("in", 0, p0, t1);});
+		Assertions.assertEquals("Can't create an arc if associated place and transition are not from the same PetriNet.", exception4.getMessage());
 	}
 	
 	@Test

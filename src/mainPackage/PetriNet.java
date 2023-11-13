@@ -18,6 +18,9 @@ public class PetriNet implements PetriNetInterface {
 	private LinkedList<Arc> arcList;
 	private LinkedList<Place> placeList;
 	private LinkedList<Transition> transitionList;
+	private int arcCount;
+	private int transitionCount;
+	private int placeCount;
 	
 	/**
 	 * Constructs a new empty PetriNet with a specified Name.
@@ -28,6 +31,9 @@ public class PetriNet implements PetriNetInterface {
 		this.setArcList(new LinkedList<Arc>());
 		this.setPlaceList(new LinkedList<Place>());;
 		this.setTransitionList(new LinkedList<Transition>());
+		arcCount = 0;
+		transitionCount = 0;
+		placeCount = 0;
 	}
 	
 	/**
@@ -105,12 +111,15 @@ public class PetriNet implements PetriNetInterface {
 	 * @throws NegativeWeightException
 	 */
 	public Arc addArc(String type, int weight, Place place, Transition transition) throws Exception, NegativeWeightException{
+		if (!(samePetriNet(this, place, transition))) {
+			throw new Exception("Can't create an arc if associated place and transition are not from the same PetriNet.");
+		}
 		int test = treatExistingArc(type, weight, place, transition);
 		if (test == 1) {
 			throw new Exception("Can't create an arc if there is already an existing zero/emptying one between the same place and transition.");
 		}
 		if (test==3){
-			System.out.println("There was already an arc between the designated place and transition. The weight of the former one has been updated");
+			System.out.println("There was already an arc between the designated place and transition. The weight of the former one has been updated.");
 			return findExistingArc(place, transition);
 		}
 		if (weight<0) {
@@ -120,16 +129,18 @@ public class PetriNet implements PetriNetInterface {
 			if (test == 2) {
 				throw new Exception("Can't create an arcIn if there is already an existing arcOut between the same place and transition.");
 			}
-			ArcIn newArcIn = new ArcIn(arcList.size(),weight, place, transition);
+			ArcIn newArcIn = new ArcIn(arcCount, weight, place, transition);
 			this.arcList.add(newArcIn);
+			arcCount++;
 			return newArcIn;
 		}
 		else if (type == "out") {
 			if (test == 2) {
 				throw new Exception("Can't create an arcOut if there is already an existing arcIn between the same place and transition.");
 			}
-			ArcOut newArcOut = new ArcOut(arcList.size(), weight, place, transition);
+			ArcOut newArcOut = new ArcOut(arcCount, weight, place, transition);
 			this.arcList.add(newArcOut);
+			arcCount++;
 			return newArcOut;
 		}
 		else {
@@ -146,23 +157,38 @@ public class PetriNet implements PetriNetInterface {
 	 * @throws Exception
 	 */
 	public Arc addArc(String type, Place place, Transition transition) throws Exception {
+		if (!(samePetriNet(this, place, transition))) {
+			throw new Exception("Can't create an arc if associated place and transition are not from the same PetriNet.");
+		}
 		if (treatExistingArc(type,-1, place, transition) == 1) {
 			throw new Exception("Can't create an emptying/zero arc if there is already an existing arc between the same place and transition.");
 		}
-		
 		if (type == "emptying") {
-			ArcEmptying newArcEmptying = new ArcEmptying(arcList.size(), place, transition); 
+			ArcEmptying newArcEmptying = new ArcEmptying(arcCount, place, transition); 
 			this.arcList.add(newArcEmptying);
+			arcCount++;
 			return newArcEmptying;
 		}
 		else if (type == "zero") {
-			ArcZero newArcZero = new ArcZero(arcList.size(), place, transition);
+			ArcZero newArcZero = new ArcZero(arcCount, place, transition);
 			this.arcList.add(newArcZero);
+			arcCount++;
 			return newArcZero;
 		}
 		else { 
 			throw new Exception("This type of arc does not exist/Not enough arguments");
 		}
+	}
+	
+	/**
+	 * Checks if both designated Place and Transition are from the same designated PetriNet.
+	 * @param petriNet The designated PetriNet.
+	 * @param place The designated Place.
+	 * @param transition The designated Transition.
+	 * @return Returns true if both Place and Transition are from the designated PetriNet. False otherwise.
+	 */
+	public boolean samePetriNet(PetriNet petriNet, Place place, Transition transition) {
+		return(petriNet.getPlaceList().contains(place) && petriNet.getTransitionList().contains(transition));
 	}
 	
 	/**
@@ -219,8 +245,9 @@ public class PetriNet implements PetriNetInterface {
 	 * @throws NegativeNbTokensException 
 	 */
 	public Place addPlace(int tokens) throws NegativeNbTokensException {
-		Place newPlace = new Place(placeList.size(), tokens);
+		Place newPlace = new Place(placeCount, tokens);
 		this.placeList.add(newPlace);
+		placeCount++;
 		return newPlace;
 	}
 
@@ -228,9 +255,10 @@ public class PetriNet implements PetriNetInterface {
 	 * Adds a Transition to the network.
 	 */
 	public Transition addTransition() {
-		Transition t = new Transition(transitionList.size());
-		transitionList.add(t);
-		return t;
+		Transition newTransition = new Transition(transitionCount);
+		transitionList.add(newTransition);
+		transitionCount++;
+		return newTransition;
 	}
 
 	/**
