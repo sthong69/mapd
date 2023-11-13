@@ -12,11 +12,12 @@ public class ArcEmptying extends ArcIn {
 
 	/**
 	 * Constructs a new EmptyingArc with specified Place and Transition.
+	 * @param id The id associated to this ArcEmptying.
 	 * @param place The Place connected to this DrainerArc.
 	 * @param transition The Transition connected to this DrainerArc.
 	 */
-	public ArcEmptying(Place place, Transition transition) throws NegativeWeightException{
-		super(place, transition);
+	public ArcEmptying(int id, Place place, Transition transition) throws NegativeWeightException{
+		super(id, place, transition);
 	}
 	
 	/**

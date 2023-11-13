@@ -9,13 +9,16 @@ import java.util.List;
  */
 public class Transition {
 	
+	private String id;
 	private LinkedList<ArcIn> arcInList;
 	private LinkedList<ArcOut> arcOutList;
 	
 	/**
 	 * Constructs a new Transition with empty lists of ArcIn and ArcOut.
+	 * @param id The id associated to this Transition.
 	 */
-	public Transition() {
+	public Transition(int id) {
+		setId("T_"+id);
 		setArcInList(new LinkedList<ArcIn>());
 		setArcOutList(new LinkedList<ArcOut>());
 	}
@@ -34,6 +37,14 @@ public class Transition {
 	 */
 	public void setArcInList(LinkedList<ArcIn> arcInList) {
 		this.arcInList = arcInList;
+	}
+	
+	/**
+	 * Sets the id associated to this Transition.
+	 * @param id
+	 */
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	/**
@@ -104,7 +115,7 @@ public class Transition {
 	 * @return A string representing this Transition.
 	 */
 	public String toString() {
-		return "Transition String";
+		return "Transition: "+id;
 	}
 	
 }

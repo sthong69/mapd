@@ -11,11 +11,12 @@ public class ArcZero extends ArcIn {
 	
 	/**
 	 * Constructs a new ArcZero with specified Place and Transition.
+	 * @param id The id associated to this ArcZero.
 	 * @param place The Place connected to this ArcZero.
 	 * @param transition The Transition connected to this ArcZero.
 	 */
-	public ArcZero(Place place, Transition transition) throws NegativeWeightException{
-		super(place, transition);
+	public ArcZero(int id, Place place, Transition transition) throws NegativeWeightException{
+		super(id, place, transition);
 	}
 	
 	/**

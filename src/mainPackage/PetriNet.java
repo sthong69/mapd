@@ -118,7 +118,7 @@ public class PetriNet implements PetriNetInterface {
 			if (test == 2) {
 				throw new Exception("Can't create an arcIn if there is already an existing arcOut between the same place and transition.");
 			}
-			ArcIn newArcIn = new ArcIn(weight, place, transition);
+			ArcIn newArcIn = new ArcIn(arcList.size(),weight, place, transition);
 			this.arcList.add(newArcIn);
 			return newArcIn;
 		}
@@ -126,7 +126,7 @@ public class PetriNet implements PetriNetInterface {
 			if (test == 2) {
 				throw new Exception("Can't create an arcOut if there is already an existing arcIn between the same place and transition.");
 			}
-			ArcOut newArcOut = new ArcOut(weight, place, transition);
+			ArcOut newArcOut = new ArcOut(arcList.size(), weight, place, transition);
 			this.arcList.add(newArcOut);
 			return newArcOut;
 		}
@@ -149,12 +149,12 @@ public class PetriNet implements PetriNetInterface {
 		}
 		
 		if (type == "emptying") {
-			ArcEmptying newArcEmptying = new ArcEmptying(place, transition); 
+			ArcEmptying newArcEmptying = new ArcEmptying(arcList.size(), place, transition); 
 			this.arcList.add(newArcEmptying);
 			return newArcEmptying;
 		}
 		else if (type == "zero") {
-			ArcZero newArcZero = new ArcZero(place, transition);
+			ArcZero newArcZero = new ArcZero(arcList.size(), place, transition);
 			this.arcList.add(newArcZero);
 			return newArcZero;
 		}
@@ -216,7 +216,7 @@ public class PetriNet implements PetriNetInterface {
 	 * @param tokens The number of tokens of the added Place.
 	 */
 	public Place addPlace(int tokens) {
-		Place newPlace = new Place(tokens);
+		Place newPlace = new Place(placeList.size(), tokens);
 		this.placeList.add(newPlace);
 		return newPlace;
 	}
@@ -225,7 +225,7 @@ public class PetriNet implements PetriNetInterface {
 	 * Adds a Transition to the network.
 	 */
 	public Transition addTransition() {
-		Transition t = new Transition();
+		Transition t = new Transition(transitionList.size());
 		transitionList.add(t);
 		return t;
 	}
@@ -297,5 +297,11 @@ public class PetriNet implements PetriNetInterface {
 				tempArc.startExchange();
 			}
 		}
+	}
+	
+	public String toString() {
+		String res = "";
+		
+		return res;
 	}
 }

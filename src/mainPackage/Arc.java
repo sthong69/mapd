@@ -5,6 +5,7 @@ package mainPackage;
  * It defines methods for getting and setting associated attributes.
  */
 public abstract class Arc {
+	private String id;
 	private int weight;
 	private Place place;
 	private Transition transition;
@@ -25,6 +26,15 @@ public abstract class Arc {
 	 */
 	public void setWeight(int weight) {
 		this.weight = weight;
+	}
+	
+	/**
+	 * Sets the id associated to this Arc.
+	 * @param id
+	 */
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 
 
@@ -68,6 +78,6 @@ public abstract class Arc {
 	 * @return A string representing this Arc.
 	 */
 	public String toString() {
-		return "Weight: "+weight+"\nPlace: "+place+"\nTransition: "+transition;
+		return "Arc: "+id+", Weight: "+weight+"Place: "+place.toString()+", Transition: "+transition.toString();
 	}
 }

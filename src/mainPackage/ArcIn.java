@@ -11,16 +11,18 @@ import Exceptions.NegativeWeightException;
 public class ArcIn extends Arc {
 
 	/**
-	 * Constructs a new ArcIn with specified weight, Place and Transition.
+	 * Constructs a new ArcIn with specified id, weight, Place and Transition.
+	 * @param id The id associated to this ArcIn.
 	 * @param weight The weight associated to this ArcIn.
 	 * @param place The Place connected to this ArcIn.
 	 * @param transition The Transition connected to this ArcIn.
 	 */
-	public ArcIn(int weight, Place place, Transition transition) throws NegativeWeightException{
+	public ArcIn(int id,int weight, Place place, Transition transition) throws NegativeWeightException{
 		if (weight<0) {
 			throw new NegativeWeightException("WARNING: An arc can not have a negative weight.");
 		}
 		
+		setId("A_"+id);
 		setWeight(weight);
 		setPlace(place);
 		setTransition(transition);
@@ -29,12 +31,14 @@ public class ArcIn extends Arc {
 	}
 	
 	/**
-	 * Constructs a new ArcIn with specified Place and Transition and without specifying the weight (set to 1).
+	 * Constructs a new ArcIn with specified id, Place and Transition and without specifying the weight (set to 1).
+	 * @param id The id associated to this ArcIn.
 	 * @param place The Place connected to this ArcIn.
 	 * @param transition The Transition connected to this ArcIn.
+	 * @param id The id of the Arc created.
 	 */
-	public ArcIn(Place place, Transition transition) throws NegativeWeightException{
-		this(1, place, transition);
+	public ArcIn(int id, Place place, Transition transition) throws NegativeWeightException{
+		this(id, 1, place, transition);
 	}
 	
 	/**

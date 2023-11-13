@@ -9,14 +9,18 @@ import Exceptions.NegativeNbTokensException;
  * It contains methods for managing the number of tokens and associated arcs.
  */
 public class Place {
+	
+	private String id;
 	private int nbTokens;
 	private LinkedList<Arc> arcList;
 	
 	/**
 	 * Constructs a new Place with a specified initial number of tokens.
 	 * @param nbTokens The initial number of tokens in the place.
+	 * @param id The id associated to this Place.
 	 */	
-	public Place(int nbTokens) {
+	public Place(int id, int nbTokens) {
+		setId("P_"+id);
 		setnbTokens(nbTokens);
 		setArcList(new LinkedList<Arc>());
 	}
@@ -35,6 +39,14 @@ public class Place {
 	 */
 	private void setArcList(LinkedList<Arc> arcList) {
 		this.arcList = arcList;
+	}
+	
+	/**
+	 * Sets the id associated to this Place.
+	 * @param id
+	 */
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	/**
@@ -109,6 +121,6 @@ public class Place {
 	 * @return A string representing this Place.
 	 */
 	public String toString() {
-		return "";
+		return "Place: "+id+", tokens: "+nbTokens;
 	}
 }

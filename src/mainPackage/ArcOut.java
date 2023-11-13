@@ -12,14 +12,17 @@ public class ArcOut extends Arc {
 
 	/**
 	 * Constructs a new ArcOut with specified weight, Place and Transition.
+	 * @param id The id associated to this ArcOut.
 	 * @param weight The weight associated to this ArcOut.
 	 * @param place The Place connected to this ArcOut.
 	 * @param transition The Transition connected to this ArcOut.
 	 */
-	public ArcOut(int weight, Place place, Transition transition) throws NegativeWeightException{
+	public ArcOut(int id, int weight, Place place, Transition transition) throws NegativeWeightException{
 		if (weight<0) {
 			throw new NegativeWeightException("WARNING: An arc can not have a negative weight.");
 		}
+		
+		setId("A_"+id);
 		setWeight(weight);
 		setPlace(place);
 		setTransition(transition);
@@ -29,11 +32,12 @@ public class ArcOut extends Arc {
 	
 	/**
 	 * Constructs a new ArcOut with specified Place and Transition and without specifying the weight (set to 1).
+	 * @param id The id associated to this ArcOut.
 	 * @param place The Place connected to this ArcOut.
 	 * @param transition The Transition connected to this ArcOut.
 	 */
-	public ArcOut(Place place, Transition transition) throws NegativeWeightException{
-		this(1, place, transition);
+	public ArcOut(int id, Place place, Transition transition) throws NegativeWeightException{
+		this(id, 1, place, transition);
 	}
 	
 	/**
