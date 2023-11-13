@@ -17,7 +17,7 @@ public class ArcIn extends Arc {
 	 * @param place The Place connected to this ArcIn.
 	 * @param transition The Transition connected to this ArcIn.
 	 */
-	public ArcIn(int id,int weight, Place place, Transition transition) throws NegativeWeightException{
+	public ArcIn(int id, int weight, Place place, Transition transition) throws NegativeWeightException{
 		if (weight<0) {
 			throw new NegativeWeightException("WARNING: An arc can not have a negative weight.");
 		}

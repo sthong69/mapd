@@ -47,7 +47,7 @@ public class TestPetriNet {
 	}
 	
 	@Test
-	public void testAddPlace() {
+	public void testAddPlace() throws NegativeNbTokensException {
 		pl0 = pn0.addPlace(2);
 		Assertions.assertEquals(1,pn0.getPlaceList().size());
 		Assertions.assertEquals(2, pl0.getNbTokens());
@@ -62,14 +62,14 @@ public class TestPetriNet {
 	@Test
 	public void testAddArc() throws Exception, NegativeWeightException {
 		PetriNet pn = new PetriNet("");
-		Place p1 = new Place (0);
-		Place p2 = new Place (0);
-		Place p3 = new Place (0);
-		Place p4 = new Place (0);
-		Place p5 = new Place (0);
-		Place p6 = new Place (0);
-		Place p7 = new Place (0);
-		Transition t = new Transition();
+		Place p1 = new Place (1, 0);
+		Place p2 = new Place (2, 0);
+		Place p3 = new Place (3, 0);
+		Place p4 = new Place (4, 0);
+		Place p5 = new Place (5, 0);
+		Place p6 = new Place (6, 0);
+		Place p7 = new Place (7, 0);
+		Transition t = new Transition(0);
 		
 		ai1 = pn.addArc("in", 2, p1, t);
 		Assertions.assertTrue(ai1 instanceof ArcIn);
@@ -505,5 +505,20 @@ public class TestPetriNet {
 		
 		Exception exception6 = Assertions.assertThrows(Exception.class, ()->{Arc an6 = pn5.addArc("in", 5, p6, t6);});
 		Assertions.assertEquals("Can't create an arcIn if there is already an existing arcOut between the same place and transition.", exception6.getMessage());
+	}
+	
+	@Test
+	public void testToString() throws Exception {
+		PetriNet pn10 = new PetriNet("");
+		
+		Place p0 = pn10.addPlace(2);
+		Place p1 = pn10.addPlace(0);
+		Transition t0 = pn10.addTransition();
+		Transition t1 = pn10.addTransition();
+		Arc a0 = pn10.addArc("out", 2, p0, t0);
+		Arc a1 = pn10.addArc("in", 3, p0, t1);
+		Arc a2 = pn10.addArc("in", 1, p1, t0);
+		
+		System.out.println(pn10.toString());
 	}
 }

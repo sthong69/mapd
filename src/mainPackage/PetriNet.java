@@ -3,7 +3,10 @@ package mainPackage;
 import java.util.LinkedList;
 import java.util.Random;
 
+import Exceptions.NegativeNbTokensException;
 import Exceptions.NegativeWeightException;
+
+
 
 /**
  * The 'PetriNet' class represents a Petri network with places, transitions, and arcs.
@@ -21,7 +24,6 @@ public class PetriNet implements PetriNetInterface {
 	 * @param name The name of the PetriNet.
 	 */
 	public PetriNet(String name) {
-		// TODO : faire un toString()
 		this.setName(name);
 		this.setArcList(new LinkedList<Arc>());
 		this.setPlaceList(new LinkedList<Place>());;
@@ -214,8 +216,9 @@ public class PetriNet implements PetriNetInterface {
 	/**
 	 * Adds a Place with a designated number of tokens to the network.
 	 * @param tokens The number of tokens of the added Place.
+	 * @throws NegativeNbTokensException 
 	 */
-	public Place addPlace(int tokens) {
+	public Place addPlace(int tokens) throws NegativeNbTokensException {
 		Place newPlace = new Place(placeList.size(), tokens);
 		this.placeList.add(newPlace);
 		return newPlace;
@@ -301,7 +304,74 @@ public class PetriNet implements PetriNetInterface {
 	
 	public String toString() {
 		String res = "";
+		String r = "-->";
+		String l = "<--";
+		res += "---------------Places---------------\n";
+		for (Place p : this.placeList) {
+			String line =p.toString()+" ";
+			for (Arc a : p.getArcList()) {
+				if (a instanceof ArcIn) {
+					line += r+" "+a.getId();
+				}
+				if (a instanceof ArcOut) {
+					line = (a.getId()+" "+r+" ") + line;
+				}
+				
+			}
+			line += "\n";
+			res += line;
+		}
+		res += "------------Transitions-------------\n";
+		for (Transition t : this.getTransitionList()) {
+			String line = t.toString()+" ";
+			String ArcInList = "";
+			for (Arc a : t.getArcInList()) {
+				ArcInList += a.getId()+" ";
+			}
+			if (ArcInList != "") {
+				ArcInList += r+" ";
+			}
+			line = ArcInList + line;
+			String ArcOutList = "";
+			for (Arc a : t.getArcOutList()) {
+				ArcOutList += a.getId()+" ";
+			}
+			if (ArcOutList != "") {
+				ArcOutList = r+" " + ArcOutList;
+			}
+			line += ArcOutList;
+			line += "\n";
+			res += line;
+		}
+		res += "----------------Arcs----------------\n";
+		for (Arc a : this.getArcList()) {
+			if (a instanceof ArcIn) {
+				res += a.getTransition().toString() +" "+ l +" "+a.toString()+" "+l+" "+ a.getPlace().getId() +"\n";
+			}
+			if (a instanceof ArcOut) {
+				res += a.getTransition().toString() +" "+ r +" "+a.toString()+" "+r+" "+ a.getPlace().getId() +"\n";
+			}
+		}
 		
 		return res;
+	}
+	
+	public static void main(String[] args) throws Exception {
+		
+		PetriNet pn0 = new PetriNet("");
+		
+		Place p0 = pn0.addPlace(2);
+		Place p1 = pn0.addPlace(0);
+		Transition t0 = pn0.addTransition();
+		Transition t1 = pn0.addTransition();
+		Arc a0 = pn0.addArc("out", 2, p0, t0);
+		Arc a1 = pn0.addArc("in", 3, p0, t1);
+		Arc a2 = pn0.addArc("in", 1, p1, t0);
+		
+		
+		
+		System.out.println(pn0.toString());
+
+		
 	}
 }

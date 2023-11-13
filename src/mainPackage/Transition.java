@@ -24,14 +24,6 @@ public class Transition {
 	}
 	
 	/**
-	 * Gets the list of ArcIn of this Transition.
-	 * @return The list of ArcIn of this Transition.
-	 */
-	public LinkedList<ArcIn> getArcInList() {
-		return arcInList;
-	}
-	
-	/**
 	 * Sets the list of ArcIn of this Transition.
 	 * @param arcInList The list of ArcIn to be associated with this Transition.
 	 */
@@ -40,11 +32,27 @@ public class Transition {
 	}
 	
 	/**
+	 * Sets the list of ArcOut of this Transition.
+	 * @param arcOutList The list of ArcOut to be associated with this Transition.
+	 */
+	public void setArcOutList(LinkedList<ArcOut> arcOutList) {
+		this.arcOutList = arcOutList;
+	}
+		
+	/**
 	 * Sets the id associated to this Transition.
 	 * @param id
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	/**
+	 * Gets the id associated to this Transition.
+	 * @return The id associated to this Transition.
+	 */
+	public String getId() {
+		return id;
 	}
 	
 	/**
@@ -56,13 +64,13 @@ public class Transition {
 	}
 	
 	/**
-	 * Sets the list of ArcOut of this Transition.
-	 * @param arcOutList The list of ArcOut to be associated with this Transition.
+	 * Gets the list of ArcIn of this Transition.
+	 * @return The list of ArcIn of this Transition.
 	 */
-	public void setArcOutList(LinkedList<ArcOut> arcOutList) {
-		this.arcOutList = arcOutList;
+	public LinkedList<ArcIn> getArcInList() {
+		return arcInList;
 	}
-	
+		
 	/**
 	 * Adds an ArcIn to this Transition.
 	 * @param arc The ArcIn to be added to this Transition.
@@ -115,7 +123,7 @@ public class Transition {
 	 * @return A string representing this Transition.
 	 */
 	public String toString() {
-		return "Transition: "+id;
+		return id;
 	}
 	
 }

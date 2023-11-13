@@ -1,5 +1,7 @@
 package mainPackage;
 
+import Exceptions.NegativeNbTokensException;
+
 /**
  * The 'PetriNetInterface' interface defines the methods that a Petri net network should implement.
  * It provides a set of methods to operate, manipulate and analyze the network.
@@ -33,8 +35,9 @@ public interface PetriNetInterface {
 	/**
 	 * Adds a Place with a designated number of tokens to the network.
 	 * @param tokens The number of tokens of the added Place.
+	 * @throws NegativeNbTokensException 
 	 */
-	public Place addPlace(int tokens);
+	public Place addPlace(int tokens) throws NegativeNbTokensException;
 	
 	/**
 	 * Adds a Transition to the network.

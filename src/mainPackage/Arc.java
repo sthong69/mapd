@@ -36,6 +36,14 @@ public abstract class Arc {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	/**
+	 * Gets the id associated to this Arc.
+	 * @return The id associated to this Arc.
+	 */
+	public String getId() {
+		return id;
+	}
 
 
 	/**
@@ -78,6 +86,6 @@ public abstract class Arc {
 	 * @return A string representing this Arc.
 	 */
 	public String toString() {
-		return "Arc: "+id+", Weight: "+weight+"Place: "+place.toString()+", Transition: "+transition.toString();
+		return id+" : Weight = "+weight;
 	}
 }

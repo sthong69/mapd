@@ -19,7 +19,10 @@ public class Place {
 	 * @param nbTokens The initial number of tokens in the place.
 	 * @param id The id associated to this Place.
 	 */	
-	public Place(int id, int nbTokens) {
+	public Place(int id, int nbTokens) throws NegativeNbTokensException {
+		if (nbTokens < 0) {
+			throw new NegativeNbTokensException("Number of tokens cannot be negative.");
+		}
 		setId("P_"+id);
 		setnbTokens(nbTokens);
 		setArcList(new LinkedList<Arc>());
@@ -47,6 +50,15 @@ public class Place {
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	
+	/**
+	 * Gets the id associated to this Place.
+	 * @return The id associated to this Place.
+	 */
+	public String getId() {
+		return id;
 	}
 	
 	/**
@@ -121,6 +133,6 @@ public class Place {
 	 * @return A string representing this Place.
 	 */
 	public String toString() {
-		return "Place: "+id+", tokens: "+nbTokens;
+		return id+" : tokens = "+nbTokens;
 	}
 }

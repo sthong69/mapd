@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import Exceptions.NegativeNbTokensException;
 import Exceptions.NegativeWeightException;
 import mainPackage.ArcZero;
 import mainPackage.Place;
@@ -18,17 +19,17 @@ public class TestArcZero {
 	static ArcZero a1;
 	
 	@BeforeAll
-	public static void setup() throws NegativeWeightException {
-		p0 = new Place(0);
-		p1 = new Place(2);
-		t0 = new Transition();
-		a0 = new ArcZero(p0, t0);
-		a1 = new ArcZero(p1, t0);		
+	public static void setup() throws NegativeWeightException, NegativeNbTokensException {
+		p0 = new Place(0, 0);
+		p1 = new Place(1, 2);
+		t0 = new Transition(0);
+		a0 = new ArcZero(0, p0, t0);
+		a1 = new ArcZero(1, p1, t0);		
 	}
 	
 	@Test
 	public void testConstructor() throws NegativeWeightException {
-		a0 = new ArcZero(p0, t0);
+		a0 = new ArcZero(0, p0, t0);
 		Assertions.assertEquals(p0, a0.getPlace());
 		Assertions.assertEquals(t0, a0.getTransition());
 		Assertions.assertEquals(1, a0.getWeight());
